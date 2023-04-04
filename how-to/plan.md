@@ -96,6 +96,45 @@ npm install json-server --save-dev
 npm run server <-- in another terminal
 
 
+
+
+### services/notes.js
+```
+import axios from 'axios'
+// const baseUrl = '/api/notes'
+const baseUrl = 'http://localhost:3001/api/notes'
+
+let token = null
+
+const setToken = (newToken) => {
+	token = `Bearer ${newToken}`
+}
+
+const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
+
+const create = async (newObject) => {
+	const config = {
+		headers: { Authorization: token }
+	}
+
+  const response = await axios.post(baseUrl, newObject, config)
+	return response.data
+}
+
+const update = (id, newObject) => {
+  const request = axios.put(`${baseUrl}/${id}`, newObject)
+  return request.then(response => response.data)
+}
+
+const noteService = { getAll, create, update, setToken }
+
+export default noteService
+```
+
+
 # BACKEND
 
 mkdir server
@@ -110,12 +149,13 @@ npm install morgan
 npm install cors
 npm install mongoose
 npm install dotenv
-npm install --save-dev-jest
+npm install --save-dev jest
 npm install --save-dev cross-env
 npm install --save-dev supertest
 npm install express-async-errors
 npm install bcrypt
 npm install mongoose-unique-validator
+(npm install mongoose@6)
 npm install jsonwebtoken
 npm install prop-types
 
@@ -373,7 +413,7 @@ afterAll(async () => {
 ### tests/teardown.js
 ```js
 module.exports = () => {
-	process.ecit(0)
+	process.exit(0)
 }
 ```
 
