@@ -16,6 +16,7 @@ npm install axios
 npm install --save-dev @testing-library/react @testing-library/jest-dom
 npm install --save-dev @testing-library/user-event
 npm install --save-dev cypress
+npm install react-router-dom
 
 ## Files
 
@@ -94,8 +95,6 @@ make db.json file in the root of your project
 * in client folder
 npm install json-server --save-dev
 npm run server <-- in another terminal
-
-
 
 
 ### services/notes.js
