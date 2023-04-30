@@ -1,6 +1,7 @@
 const config = require("./utils/config");
 const express = require("express");
 const app = express();
+const bodyparser = require("body-parser");
 const cors = require("cors");
 const middleware = require("./utils/middleware");
 const testRouter = require("./models/testfile");
@@ -24,6 +25,8 @@ mongoose
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.json());
 app.use(middleware.requestLogger);
 
 app.use("/", testRouter);

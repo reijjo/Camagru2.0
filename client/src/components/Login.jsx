@@ -44,7 +44,7 @@ const Login = ({ updateUser }) => {
         // backgroundImage: `url(${chinese})`,
       }}
     >
-      <div className="mx-auto mb-60 mt-20 w-2/3 max-w-screen-sm rounded-md bg-white p-4 px-4">
+      <div className="mx-auto w-2/3 max-w-screen-sm rounded-md bg-white p-4 px-4">
         <div className="mb-4 text-3xl font-bold">Login</div>
         <Notification message={notification} />
         <form className="flex flex-col gap-4" onSubmit={login}>
@@ -80,6 +80,14 @@ const Login = ({ updateUser }) => {
           </div>
           <Button type="submit">Login</Button>
         </form>
+        <div className="py-1 text-right">
+          <a
+            className="text-blue-900 transition-colors duration-300 hover:text-blue-700"
+            href="/forgot"
+          >
+            Forgot password?
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -6,7 +6,11 @@ import Header from "./components/Header";
 import Foot from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Verify from "./components/Verify";
+import Forgot from "./components/Forgot";
+import ChangePasswd from "./components/ChangePasswd";
 import LoggedIn from "./components/LoggedIn";
+import Settings from "./components/Settings";
 import userService from "./services/userService";
 
 const App = () => {
@@ -42,7 +46,11 @@ const App = () => {
             element={!user ? <Login updateUser={updateUser} /> : <LoggedIn />}
           />
           <Route path="/register" element={<Register />} />
+          <Route path="/register/:verifyCode" element={<Verify />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/forgot/:verifyCode" element={<ChangePasswd />} />
           <Route path="/loggedIn" element={<LoggedIn />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
         <Foot />
       </Router>

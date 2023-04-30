@@ -48,6 +48,9 @@ const Nav = ({ user }) => {
         <>
           <div className="flex md:order-2">
             <Navbar.Toggle />
+            <Link className="px-12" to="/settings">
+              <Button color="purple">Settings</Button>
+            </Link>
             <Link to="/">
               <Button
                 color="failure"
