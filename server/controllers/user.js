@@ -14,6 +14,128 @@ usersRouter.get("/", async (req, res) => {
   res.json(users);
 });
 
+usersRouter.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findOne({ _id: id });
+  res.json({ user });
+});
+
+usersRouter.put("/:id", async (req, res) => {
+  const id = req.params.id;
+  const info = req.body;
+
+  const user = await User.findOne({ _id: id });
+
+  console.log("hihuu", user);
+  console.log("newInfo", info);
+
+  if (info.newPw !== info.newConfpw) {
+    return res.json({
+      message: "Passwords do not match!",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  // EMAIL CHECKS
+  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  const emailExists = await User.findOne({
+    email: info.newEmail,
+    _id: { $ne: id },
+  });
+
+  if (!emailRegex.test(info.newEmail)) {
+    return res.json({
+      message: "Invalid email address!",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  if (info.newEmail.length < 5 || info.newEmail.length > 50) {
+    return res.json({
+      message: "Nobody has that short/long email address.",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  if (emailExists) {
+    return res.json({
+      message: "Email already exists.",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  // USERNAME CHECKS
+
+  const usernameRegex = /^[a-zA-Z0-9!_-]+$/;
+  const usernameExists = await User.findOne({
+    username: info.newUsername,
+    _id: { $ne: id },
+  });
+
+  if (usernameExists) {
+    return res.json({
+      message: "Username already exists.",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  if (!usernameRegex.test(info.newUsername)) {
+    return res.json({
+      message:
+        "Invalid username! Only letters, numbers, and the special characters ('!', '-', '_') are allowed.",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  if (info.newUsername.length < 3 || info.newUsername.length > 30) {
+    return res.json({
+      message: "Username must have at least 3 and max 30 characters.",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  // PASSWORD CHECKS
+
+  const passwordRegex = /^[a-zA-Z0-9!_-]+$/;
+  const validRegex = /^(?=.*[A-Z])(?=.*[!_-])(?=.*\d).*$/;
+
+  if (!passwordRegex.test(info.newPw)) {
+    return res.json({
+      message:
+        "Invalid password! Only letters, numbers, and the special characters ('!', '-', '_') are allowed.",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  if (!validRegex.test(info.newPw)) {
+    return res.json({
+      message:
+        "Password must contain at least one capital letter, one number and one special character (!-_).",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  if (info.newPw.length < 8 || info.newPw.length > 30) {
+    return res.json({
+      message: "Password must have at least 8 and max 30 characters.",
+      style: { color: "red", border: "2px solid" },
+    });
+  }
+
+  const passwordHash = await bcrypt.hash(info.newPw, 10);
+
+  await User.findByIdAndUpdate(id, {
+    email: info.newEmail,
+    username: info.newUsername,
+    password: passwordHash,
+  });
+
+  res.json({
+    message: "Updated!",
+    style: { color: "green", border: "2px solid" },
+  });
+});
+
 // API/REGISTER
 
 usersRouter.post("/register", async (req, res) => {
