@@ -2,7 +2,11 @@
 Updated version of Camagru using React, Node.js, Express.js and MongoDB.
 
 ## Tools & Languages
-* Tailwindcss
+* React
+* Node.js
+* Express.js
+* MongoDB
+* TailwindCSS
 
 
 ## Functionality:
