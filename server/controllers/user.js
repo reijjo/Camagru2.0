@@ -307,6 +307,7 @@ usersRouter.post("/forgot", async (req, res) => {
       console.log("Error sending mail", err);
     } else {
       console.log("Email sent:", info);
+      res.json({ message: `Reset Password link sent to ${user.email}.` });
     }
   });
 
@@ -324,11 +325,12 @@ usersRouter.get("/forgot/:verifyCode", async (req, res) => {
   res.json({ user });
 });
 
-usersRouter.put("/forgot", async (req, res) => {
+usersRouter.put("/forgot/new", async (req, res) => {
   const { verifyCode, newPassword } = req.body;
+  console.log("reqbody", verifyCode);
   const user = await User.findOne({ verifyCode: verifyCode });
 
-  // console.log("User", user);
+  console.log("User", user);
   console.log("pw", newPassword);
 
   if (!user) {
@@ -361,8 +363,11 @@ usersRouter.put("/forgot", async (req, res) => {
   }
 
   const newPasswordHash = await bcrypt.hash(newPassword, 10);
+  console.log("NEW", newPasswordHash);
 
-  await User.findByIdAndUpdate(user._id, { password: newPasswordHash });
+  await User.findByIdAndUpdate(user._id, {
+    password: newPasswordHash,
+  });
   res.json({
     message: "Password updated succesfully!",
     style: { color: "green", border: "2px solid" },

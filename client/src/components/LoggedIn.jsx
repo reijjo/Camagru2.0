@@ -1,7 +1,8 @@
-// import ReactDOM from "react-dom";
 import Webcam from "react-webcam";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "flowbite-react";
+import imageService from "../services/imageService";
+import { v4 as uuid } from "uuid";
 
 const confetti = require("../img/confetti.png");
 const tpbg = require("../img/transparent_background.jpg");
@@ -9,7 +10,7 @@ const trees = require("../img/puut.png");
 const chinese = require("../img/pattern_chinese.png");
 const viritys = require("../img/Telefunken_FuBK.png");
 
-const LoggedIn = () => {
+const LoggedIn = ({ user }) => {
   const [webcamON, setWebcamON] = useState(false);
   const [uploadingON, setUploadingON] = useState(false);
   const [sticker1, setSticker1] = useState(false);
@@ -21,9 +22,13 @@ const LoggedIn = () => {
   const fileInputRef = useRef();
   const webcamRef = useRef();
 
+  const unique_id = uuid();
+
+  // console.log("USEERRR", user.user.id);
+
   useEffect(() => {
     if (webcamON && webcamRef.current) {
-      console.log("WEBCAMREF", webcamRef.current.video);
+      // console.log("WEBCAMREF", webcamRef.current.video);
       const video = webcamRef.current.video;
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
@@ -38,7 +43,7 @@ const LoggedIn = () => {
     }
   }, [webcamON, webcamRef, canvasRef]);
 
-  const capture = useCallback(() => {
+  const capture = useCallback(async () => {
     let imageSrc;
     if (webcamON) {
       const canvas = canvasRef.current;
@@ -51,7 +56,7 @@ const LoggedIn = () => {
 
       // imageSrc = webcamRef.current.getScreenshot();
       imageSrc = canvas.toDataURL("image/png");
-      console.log("SCREENSHOOOOT", imageSrc);
+      // console.log("SCREENSHOOOOT", imageSrc);
     } else if (uploadingON) {
       const canvas = canvasRef.current;
       const stickerCanvas = stickerCanvasRef.current;
@@ -62,8 +67,25 @@ const LoggedIn = () => {
       imageSrc = canvas.toDataURL("image/png");
       console.log("UPLOAD CAPTURE", imageSrc);
     }
+
     setTest(imageSrc);
-  }, [webcamRef, webcamON, uploadingON, canvasRef]);
+
+    const savePreview = async (image, user) => {
+      const blobImage = await (await fetch(image)).blob();
+      const fileImage = new File([blobImage], `${unique_id}.png`, {
+        type: "image/png",
+      });
+
+      try {
+        const res = await imageService.savePreview(fileImage, user);
+        console.log("taa", res);
+      } catch (error) {
+        console.error("ERROR UPLOADING IMAGE", error);
+      }
+    };
+
+    await savePreview(test, user.user);
+  }, [webcamRef, webcamON, uploadingON, canvasRef, test, user, unique_id]);
 
   const addSticker1 = () => {
     setSticker1(true);
@@ -115,7 +137,7 @@ const LoggedIn = () => {
     const context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
     console.log("Canvas Cleared!");
-    setUploadingON(!uploadingON);
+    setUploadingON(false);
   };
 
   return (

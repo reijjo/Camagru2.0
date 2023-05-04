@@ -16,6 +16,7 @@ const Verify = () => {
   const getPw = async () => {
     try {
       const res = await userService.forgotPasswd(email);
+      console.log("HUHU", res);
       setMessage(res.message);
     } catch (error) {
       console.error("Error sending password link.", error);

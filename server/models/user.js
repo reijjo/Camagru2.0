@@ -7,6 +7,12 @@ const userSchema = mongoose.Schema({
   password: String,
   verifyCode: String,
   verified: Boolean,
+  images: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Img",
+    },
+  ],
 });
 
 userSchema.plugin(uniqueValidator);
@@ -14,7 +20,7 @@ userSchema.plugin(uniqueValidator);
 userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
-		delete returnedObject.__v;
+    delete returnedObject.__v;
     delete returnedObject._id;
   },
 });

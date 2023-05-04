@@ -22,7 +22,6 @@ const getUsers = async () => {
 };
 
 const forgotPasswd = async (email) => {
-  console.log("axx", email);
   const res = await axios.post(`${baseUrl}/forgot`, { email: email });
   return res.data;
 };
@@ -33,10 +32,11 @@ const getForgot = async (verifyCode) => {
 };
 
 const changeForgot = async (verifyCode, newPassword) => {
-  const res = await axios.put(`${baseUrl}/forgot`, {
+  const res = await axios.put(`${baseUrl}/forgot/new`, {
     verifyCode: verifyCode,
     newPassword: newPassword,
   });
+  console.log("RES", res);
   return res.data;
 };
 

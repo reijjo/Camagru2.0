@@ -37,6 +37,7 @@ const ChangePasswd = () => {
     };
     verifyUser();
   }, [verifyCode, message]);
+
   console.log("user", user);
 
   console.log("passwords", passwd, confPw);
@@ -95,6 +96,7 @@ const ChangePasswd = () => {
 
   const resetPw = async () => {
     try {
+      console.log("ver", verifyCode, passwd);
       const res = await userService.changeForgot(verifyCode, passwd);
       console.log("RESSSP", res);
       setMessage({

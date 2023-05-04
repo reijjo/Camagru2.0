@@ -49,7 +49,7 @@ const App = () => {
           <Route path="/register/:verifyCode" element={<Verify />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/forgot/:verifyCode" element={<ChangePasswd />} />
-          <Route path="/loggedIn" element={<LoggedIn />} />
+          <Route path="/loggedIn" element={<LoggedIn user={user} />} />
           <Route path="/settings" element={<Settings user={user} />} />
         </Routes>
         <Foot />
