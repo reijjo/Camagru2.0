@@ -1,8 +1,9 @@
 import Webcam from "react-webcam";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "flowbite-react";
-import imageService from "../services/imageService";
 import { v4 as uuid } from "uuid";
+import Notification from "../components/Notification";
+import imageService from "../services/imageService";
 
 const confetti = require("../img/confetti.png");
 const tpbg = require("../img/transparent_background.jpg");
@@ -15,6 +16,8 @@ const LoggedIn = ({ user }) => {
   const [uploadingON, setUploadingON] = useState(false);
   const [sticker1, setSticker1] = useState(false);
 
+  const [previews, setPreviews] = useState([]);
+  const [notification, setNotification] = useState(null);
   const [test, setTest] = useState("");
 
   const canvasRef = useRef();
@@ -43,8 +46,9 @@ const LoggedIn = ({ user }) => {
     }
   }, [webcamON, webcamRef, canvasRef]);
 
-  const capture = useCallback(async () => {
+  const capture = useCallback(() => {
     let imageSrc;
+
     if (webcamON) {
       const canvas = canvasRef.current;
       const stickerCanvas = stickerCanvasRef.current;
@@ -70,23 +74,32 @@ const LoggedIn = ({ user }) => {
 
     setTest(imageSrc);
 
-    const savePreview = async (image, user) => {
-      const blobImage = await (await fetch(image)).blob();
-      const fileImage = new File([blobImage], `${unique_id}.png`, {
-        type: "image/png",
+    const savePreview = async () => {
+      const response = await fetch(imageSrc);
+      const blobImage = await response.blob();
+      const fileImage = new File([blobImage], `${unique_id}.jpg`, {
+        type: "image/jpg",
       });
 
       try {
         const res = await imageService.savePreview(fileImage, user);
         console.log("taa", res);
+        setPreviews();
+        setNotification({ message: res.message, style: res.style });
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
       } catch (error) {
         console.error("ERROR UPLOADING IMAGE", error);
       }
     };
+    savePreview();
+  }, [webcamRef, webcamON, uploadingON, canvasRef, unique_id, user]);
 
-    await savePreview(test, user.user);
-  }, [webcamRef, webcamON, uploadingON, canvasRef, test, user, unique_id]);
-
+  if (notification) {
+    console.log("NOTIF", notification.message);
+    console.log("STYLe", notification.style);
+  }
   const addSticker1 = () => {
     setSticker1(true);
     const stickerCanvas = stickerCanvasRef.current;
@@ -127,7 +140,6 @@ const LoggedIn = ({ user }) => {
     };
     if (file) {
       image.src = URL.createObjectURL(file);
-      // setTest(image.src);
       setUploadingON(!uploadingON);
     }
   };
@@ -256,6 +268,7 @@ const LoggedIn = ({ user }) => {
             </Button>
           </div>
         </div>
+        <Notification message={notification} />
         <div className="z-10 m-6 flex flex-wrap justify-between border-2 border-green-400 p-2">
           <Button
             className="m-2 flex p-2"

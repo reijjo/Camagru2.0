@@ -2,14 +2,9 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:3001/api/images";
 
-// const getStickers = async () => {
-//   const res = await axios.get(`${baseUrl}/stickers`);
-//   return res.data;
-// };
+// const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const savePreview = async (image, user) => {
-  console.log("AXIXIO", image);
-  console.log("imgAXIIOS", user);
   const formData = new FormData();
   formData.append("image", image);
   formData.append("user", JSON.stringify(user));
@@ -19,7 +14,7 @@ const savePreview = async (image, user) => {
       "Content-Type": "multipart/form-data",
     },
   });
-  console.log("AXXXIOSOS RES", res);
+  // await delay(5000);
   return res.data;
 };
 
