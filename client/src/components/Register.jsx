@@ -13,9 +13,22 @@ const Register = () => {
   const [confPassword, setConfPassword] = useState("");
   const [notification, setNotification] = useState(null);
 
-  const [passwordFocus, setPasswordFocus] = useState(false);
-  const [passwordValidationMessage, setPasswordValidationMessage] =
-    useState("");
+  const [nameLenFocus, setNameLenFocus] = useState(false);
+  const [nameLenMsg, setNameLenMsg] = useState(null);
+  const [nameValidFocus, setNameValidFocus] = useState(false);
+  const [nameValidMsg, setNameValidMsg] = useState(null);
+
+  const [pwLenFocus, setPwLenFocus] = useState(false);
+  const [pwLenMsg, setPwLenMsg] = useState(null);
+  const [pwSpecialFocus, setPwSpecialFocus] = useState(false);
+  const [pwSpecialMsg, setPwSpecialMsg] = useState(null);
+  const [pwCapitalFocus, setPwCapitalFocus] = useState(false);
+  const [pwCapitalMsg, setPwCapitalMsg] = useState(null);
+  const [pwNumFocus, setPwNumFocus] = useState(false);
+  const [pwNumMsg, setPwNumMsg] = useState(null);
+
+  const [confirmPwFocus, setConfirmPwFocus] = useState(false);
+  const [confirmPwMsg, setConfirmPwMsg] = useState(null);
 
   const registerUser = async (event) => {
     event.preventDefault();
@@ -53,27 +66,64 @@ const Register = () => {
     }
   };
 
+  const handleUsername = (event) => {
+    const value = event.target.value;
+    const nameRegex = /^[a-zA-Z0-9!_-]+$/;
+    setUsername(value);
+
+    if (value.length < 3 || value.length > 30) {
+      setNameLenMsg("3-30 characters.");
+    } else {
+      setNameLenMsg(null);
+    }
+
+    if (!nameRegex.test(value)) {
+      setNameValidMsg(
+        "Only letters numbers and special characters (!-_) allowed."
+      );
+    } else {
+      setNameValidMsg(null);
+    }
+  };
+
   const handlePasswordChange = (event) => {
     const value = event.target.value;
     setPassword(value);
 
-    const regex = /^(?=.*[A-Z])(?=.*[!_-])(?=.*[0-9]).{8,}$/;
-
-    if (!regex.test(value)) {
-      setPasswordValidationMessage(
-        "Password must contain at least one uppercase letter, one of the characters: ! _ -, and one number. It must be at least 8 characters long."
-      );
+    if (value.length < 8 || value.length > 30) {
+      setPwLenMsg("8-30 characters.");
     } else {
-      setPasswordValidationMessage("");
+      setPwLenMsg(null);
+    }
+
+    if (!/\d/.test(value)) {
+      setPwNumMsg("At least one number.");
+    } else {
+      setPwNumMsg(null);
+    }
+
+    if (!/[A-Z]/.test(value)) {
+      setPwCapitalMsg("At least one Uppercase letter.");
+    } else {
+      setPwCapitalMsg(null);
+    }
+
+    if (!/[-!_]/.test(value)) {
+      setPwSpecialMsg("At least one special character (-!_)");
+    } else {
+      setPwSpecialMsg(null);
     }
   };
 
-  const handlePasswordFocus = () => {
-    setPasswordFocus(true);
-  };
+  const handleConfirmPw = (event) => {
+    const value = event.target.value;
+    setConfPassword(value);
 
-  const handlePasswordBlur = () => {
-    setPasswordFocus(false);
+    if (value !== password) {
+      setConfirmPwMsg("Passwords doesn't match.");
+    } else {
+      setConfirmPwMsg(null);
+    }
   };
 
   return (
@@ -114,12 +164,28 @@ const Register = () => {
               placeholder="Username"
               autoComplete="off"
               required={true}
-              onChange={(event) =>
-                setUsername(event.target.value.toLowerCase())
-              }
+              onChange={handleUsername}
               value={username}
+              onFocus={() => {
+                setNameLenFocus(true);
+                setNameValidFocus(true);
+              }}
+              onBlur={() => {
+                setNameLenFocus(false);
+                setNameValidFocus(false);
+              }}
             />
           </div>
+          {nameLenFocus && nameLenMsg && (
+            <div className="col-span-2 text-xs font-light text-red-500">
+              <li>{nameLenMsg}</li>
+            </div>
+          )}
+          {nameValidFocus && nameValidMsg && (
+            <div className="col-span-2 text-xs font-light text-red-500">
+              <li>{nameValidMsg}</li>
+            </div>
+          )}
           {/* PASSWORD */}
           <div>
             <div className="mb-2 block">
@@ -132,16 +198,41 @@ const Register = () => {
               autoComplete="off"
               placeholder="Password"
               onChange={handlePasswordChange}
-              onFocus={handlePasswordFocus}
-              onBlur={handlePasswordBlur}
+              onFocus={() => {
+                setPwLenFocus(true);
+                setPwNumFocus(true);
+                setPwCapitalFocus(true);
+                setPwSpecialFocus(true);
+              }}
+              onBlur={() => {
+                setPwLenFocus(false);
+                setPwNumFocus(false);
+                setPwCapitalFocus(false);
+                setPwSpecialFocus(false);
+              }}
               value={password}
             />
-            {passwordFocus && passwordValidationMessage && (
-              <div className="text-xs font-light text-red-500">
-                {passwordValidationMessage}
-              </div>
-            )}
           </div>
+          {pwLenFocus && pwLenMsg && (
+            <div className="col-span-2 text-xs font-light text-red-500">
+              <li>{pwLenMsg}</li>
+            </div>
+          )}
+          {pwNumFocus && pwNumMsg && (
+            <div className="col-span-2 text-xs font-light text-red-500">
+              <li>{pwNumMsg}</li>
+            </div>
+          )}
+          {pwCapitalFocus && pwCapitalMsg && (
+            <div className="col-span-2 text-xs font-light text-red-500">
+              <li>{pwCapitalMsg}</li>
+            </div>
+          )}
+          {pwSpecialFocus && pwSpecialMsg && (
+            <div className="col-span-2 text-xs font-light text-red-500">
+              <li>{pwSpecialMsg}</li>
+            </div>
+          )}
           {/* CONFIRM PASSWORD */}
           <div>
             <div className="mb-2 block">
@@ -153,10 +244,21 @@ const Register = () => {
               autoComplete="off"
               placeholder="Confirm Password"
               required={true}
-              onChange={(event) => setConfPassword(event.target.value)}
+              onChange={handleConfirmPw}
+              onFocus={() => {
+                setConfirmPwFocus(true);
+              }}
+              onBlur={() => {
+                setConfirmPwFocus(false);
+              }}
               value={confPassword}
             />
           </div>
+          {confirmPwFocus && confirmPwMsg && (
+            <div className="col-span-2 text-xs font-light text-red-500">
+              <li>{confirmPwMsg}</li>
+            </div>
+          )}
           <Button type="submit">Register</Button>
         </form>
       </div>

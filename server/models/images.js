@@ -1,13 +1,9 @@
 const mongoose = require("mongoose");
 
 const imageSchema = mongoose.Schema({
-  preview: {
-    data: Buffer,
-    contentType: String,
-  },
   image: {
-    data: Buffer,
-    contentType: String,
+    path: String,
+    posted: Boolean,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

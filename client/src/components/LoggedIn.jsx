@@ -27,7 +27,18 @@ const LoggedIn = ({ user }) => {
 
   const unique_id = uuid();
 
-  // console.log("USEERRR", user.user.id);
+  useEffect(() => {
+    const fetchPreviews = async () => {
+      if (user) {
+        const res = await imageService.getPreviews(user);
+        // console.log("huhuu", res[12].image.path);
+        setPreviews(res[15].image.path);
+      }
+    };
+    fetchPreviews();
+  }, [user]);
+
+  console.log("previews", previews);
 
   useEffect(() => {
     if (webcamON && webcamRef.current) {
@@ -46,6 +57,7 @@ const LoggedIn = ({ user }) => {
     }
   }, [webcamON, webcamRef, canvasRef]);
 
+  // TAKE PHOTO
   const capture = useCallback(() => {
     let imageSrc;
 
@@ -69,7 +81,7 @@ const LoggedIn = ({ user }) => {
       context.drawImage(stickerCanvas, 0, 0, canvas.width, canvas.height);
 
       imageSrc = canvas.toDataURL("image/png");
-      console.log("UPLOAD CAPTURE", imageSrc);
+      // console.log("UPLOAD CAPTURE", imageSrc);
     }
 
     setTest(imageSrc);
@@ -84,7 +96,7 @@ const LoggedIn = ({ user }) => {
       try {
         const res = await imageService.savePreview(fileImage, user);
         console.log("taa", res);
-        setPreviews();
+        // setPreviews(res.filePath);
         setNotification({ message: res.message, style: res.style });
         setTimeout(() => {
           setNotification(null);
@@ -96,10 +108,9 @@ const LoggedIn = ({ user }) => {
     savePreview();
   }, [webcamRef, webcamON, uploadingON, canvasRef, unique_id, user]);
 
-  if (notification) {
-    console.log("NOTIF", notification.message);
-    console.log("STYLe", notification.style);
-  }
+  // console.log("Preview", previews);
+
+  // STICKERS
   const addSticker1 = () => {
     setSticker1(true);
     const stickerCanvas = stickerCanvasRef.current;
@@ -128,6 +139,7 @@ const LoggedIn = ({ user }) => {
     console.log("Removed PUUT Sticker.");
   };
 
+  //IMAGE UPLOAD
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     console.log("FILE", file);
@@ -322,9 +334,9 @@ const LoggedIn = ({ user }) => {
       <div className="lg:flex lg:h-auto lg:w-1/5 lg:flex-col lg:items-center lg:justify-start lg:border">
         <div className="m-2 p-2">Preview:</div>
         <div className="m-auto items-center overflow-y-scroll lg:h-full lg:w-full">
-          <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
+          {/* <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
             <div className="mb-2 flex h-auto flex-grow overflow-hidden rounded-md border border-yellow-200">
-              {!test ? (
+              {!previews ? (
                 <img
                   src={chinese}
                   alt="testpic"
@@ -332,7 +344,7 @@ const LoggedIn = ({ user }) => {
                 />
               ) : (
                 <img
-                  src={test}
+                  src={previews}
                   alt="testpic"
                   className="object-fit flex h-full w-full"
                 />
@@ -342,13 +354,13 @@ const LoggedIn = ({ user }) => {
               <Button size="xs">Use</Button>
               <Button size="xs">Remove</Button>
             </div>
-          </div>
+          </div> */}
           <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
             <div className="mb-2 flex h-auto flex-grow rounded-md border border-yellow-200">
               <img
-                src={chinese}
+                src={previews}
                 alt="testpic"
-                className="flex h-full w-full object-cover"
+                className="object-fit flex h-full w-full"
               />
             </div>
             <div className="flex justify-between">

@@ -4,6 +4,17 @@ const baseUrl = "http://localhost:3001/api/images";
 
 // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const getPreviews = async (user) => {
+  console.log("Axios user", user);
+  const res = await axios.get(`${baseUrl}/preview`, {
+    params: {
+      userId: user.user.id,
+    },
+  });
+  console.log("Axios res", res);
+  return res.data;
+};
+
 const savePreview = async (image, user) => {
   const formData = new FormData();
   formData.append("image", image);
@@ -18,6 +29,6 @@ const savePreview = async (image, user) => {
   return res.data;
 };
 
-const imageService = { savePreview };
+const imageService = { getPreviews, savePreview };
 
 export default imageService;
