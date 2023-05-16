@@ -6,23 +6,28 @@
 /* @import "./custom-utilities.css"; */
 
 /* @import url('css/palette1.css'); */
-@import url('css/palette2.css');
+@import url("css/palette2.css");
 
 .oma {
-	color: var(--color4)
-	/* color: green */
+  color: var(--color4);
+  /* color: green */
 }
 
 .navilapi {
-	background-color: transparent;
+  background-color: lightblue;
+  /* background-color: transparent; */
 }
 
 .info {
-	/* color: green; */
-	background: lightgray;
-	font-size: 20px;
-	border-style: solid;
-	border-radius: 5px;
-	padding: 10px;
-	margin-bottom: 10px;
+  /* color: green; */
+  background: lightgray;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.preview {
+  min-height: 25%;
 }

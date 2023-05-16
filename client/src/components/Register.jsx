@@ -3,8 +3,6 @@ import { useState } from "react";
 import userService from "../services/userService";
 import Notification from "./Notification";
 const confetti = require("../img/confetti.png");
-// const tabbied = require("../img/tabbied.png");
-// const chinese = require("../img/pattern_chinese.png");
 
 const Register = () => {
   const [email, setEmail] = useState("");

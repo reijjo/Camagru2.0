@@ -12,7 +12,7 @@ const Nav = ({ user }) => {
   };
 
   return (
-    <Navbar fluid={true} rounded={true} className="navilapi">
+    <Navbar fluid={true} className="navilapi sticky top-0 z-10">
       {!user ? (
         <>
           <div className="flex md:order-2">
@@ -20,7 +20,7 @@ const Nav = ({ user }) => {
             <Link to="/register">
               <Button className="mr-4">Register</Button>
             </Link>
-            <Link to="/">
+            <Link to="/login">
               <Button>Login</Button>
             </Link>
           </div>
@@ -31,16 +31,6 @@ const Nav = ({ user }) => {
               className="text-white"
             >
               Home
-            </Navbar.Link>
-            {/* <Navbar.Link href="/navbars">About</Navbar.Link>
-						<Navbar.Link href="/navbars">Services</Navbar.Link>
-						<Navbar.Link href="/navbars">Pricing</Navbar.Link> */}
-            <Navbar.Link
-              href="/sneakpeak"
-              className="text-white"
-              style={{ backdropFilter: "blur(10px)" }}
-            >
-              Sneak peak
             </Navbar.Link>
           </Navbar.Collapse>
         </>
@@ -66,10 +56,7 @@ const Nav = ({ user }) => {
             <Navbar.Link href="/" active={true}>
               Home
             </Navbar.Link>
-            {/* <Navbar.Link href="/navbars">About</Navbar.Link>
-						<Navbar.Link href="/navbars">Services</Navbar.Link>
-						<Navbar.Link href="/navbars">Pricing</Navbar.Link> */}
-            <Navbar.Link href="/sneakpeak">Sneak peak</Navbar.Link>
+            <Navbar.Link href="/loggedIn">Add Photo</Navbar.Link>
           </Navbar.Collapse>
         </>
       )}

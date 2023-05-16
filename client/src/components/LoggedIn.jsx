@@ -6,9 +6,7 @@ import Notification from "../components/Notification";
 import imageService from "../services/imageService";
 
 const confetti = require("../img/confetti.png");
-const tpbg = require("../img/transparent_background.jpg");
 const trees = require("../img/puut.png");
-const chinese = require("../img/pattern_chinese.png");
 const viritys = require("../img/Telefunken_FuBK.png");
 
 const LoggedIn = ({ user }) => {
@@ -32,7 +30,8 @@ const LoggedIn = ({ user }) => {
       if (user) {
         const res = await imageService.getPreviews(user);
         // console.log("huhuu", res[12].image.path);
-        setPreviews(res[15].image.path);
+        // setTest(res[15].image.path);
+        setPreviews(res[0].image.path);
       }
     };
     fetchPreviews();
@@ -84,7 +83,7 @@ const LoggedIn = ({ user }) => {
       // console.log("UPLOAD CAPTURE", imageSrc);
     }
 
-    setTest(imageSrc);
+    // setTest(imageSrc);
 
     const savePreview = async () => {
       const response = await fetch(imageSrc);
@@ -166,61 +165,74 @@ const LoggedIn = ({ user }) => {
 
   return (
     <div
-      className="font flex flex-col text-blue-200 lg:flex-row"
+      className="font flex max-h-screen flex-row text-blue-200"
       style={{
         backgroundImage: `url(${confetti})`,
       }}
     >
       {/* STICKERS */}
-      <div className="lg:flex lg:h-auto lg:w-1/5 lg:flex-col lg:items-center lg:justify-start lg:border">
-        <div className="m-2 p-2">Stickers:</div>
-        <div className="m-2 flex flex-col border border-yellow-200 p-2 lg:h-1/3 lg:w-3/4">
-          <div
-            className="mb-2 flex h-auto flex-grow items-center justify-center rounded-md border border-red-200 bg-gray-50"
-            // style={{ backgroundImage: `url(${tpbg})` }}
-          >
-            <img src={trees} alt="flowers" className="h-full w-full" />
-          </div>
-          <div className="flex justify-center">
+      <div className="flex h-screen w-1/5 flex-col items-center justify-start">
+        <div className="flex h-auto w-full justify-center p-2">Stickers:</div>
+        <div className="my-2 flex h-1/4 w-full flex-col items-center justify-center">
+          <div className="relative h-full w-full">
+            <img
+              src={trees}
+              alt="flowers"
+              className="object-fit h-full w-full bg-gray-300"
+            />
+            {/* <div className="absolute inset-x-0 bottom-0 border-2 border-yellow-300 text-center"> */}
             <Button
-              className=""
+              size="xs"
+              className="absolute inset-x-0 bottom-0 border-2 border-yellow-300 text-center"
               onClick={!sticker1 ? addSticker1 : removeSticker1}
             >
               {!sticker1 ? "Add" : "Remove"}
             </Button>
-            {/* <Button>Remove</Button> */}
+            {/* </div> */}
           </div>
         </div>
-        <div className="m-2 flex flex-col border border-yellow-200 p-2 lg:h-1/3 lg:w-3/4">
-          <div
-            className="mb-2 flex h-auto flex-grow items-center justify-center border border-red-200"
-            style={{ backgroundImage: `url(${tpbg})` }}
-          >
-            sticker
-          </div>
-          <div className="flex justify-between">
-            <Button className="">Add</Button>
-            <Button>Remove</Button>
+        <div className="my-2 flex h-1/4 w-full flex-col items-center justify-center border border-yellow-200">
+          <div className="relative h-full w-full border-2 border-blue-400">
+            <img
+              src={trees}
+              alt="flowers"
+              className="h-full w-full border border-red-600 bg-gray-300 object-cover"
+            />
+            {/* <div className="absolute inset-x-0 bottom-0 border-2 border-yellow-300 text-center"> */}
+            <Button
+              size="xs"
+              className="absolute inset-x-0 bottom-0 border-2 border-yellow-300 text-center"
+              onClick={!sticker1 ? addSticker1 : removeSticker1}
+            >
+              {!sticker1 ? "Add" : "Remove"}
+            </Button>
+            {/* </div> */}
           </div>
         </div>
-        <div className="m-2 flex flex-col border border-yellow-200 p-2 lg:h-1/3 lg:w-3/4">
-          <div
-            className="mb-2 flex h-auto flex-grow items-center justify-center border border-red-200"
-            style={{ backgroundImage: `url(${tpbg})` }}
-          >
-            sticker
-          </div>
-          <div className="flex justify-between">
-            <Button className="">Add</Button>
-            <Button>Remove</Button>
+        <div className="my-2 flex h-1/4 w-full flex-col items-center justify-center border border-yellow-200">
+          <div className="relative h-full w-full border-2 border-blue-400">
+            <img
+              src={trees}
+              alt="flowers"
+              className="h-full w-full border border-red-600 bg-gray-300 object-cover"
+            />
+            {/* <div className="absolute inset-x-0 bottom-0 border-2 border-yellow-300 text-center"> */}
+            <Button
+              size="xs"
+              className="absolute inset-x-0 bottom-0 border-2 border-yellow-300 text-center"
+              onClick={!sticker1 ? addSticker1 : removeSticker1}
+            >
+              {!sticker1 ? "Add" : "Remove"}
+            </Button>
+            {/* </div> */}
           </div>
         </div>
       </div>
       {/* CENTER DIV */}
-      <div className="flex flex-col p-24 lg:w-3/5 lg:border">
+      <div className="flex w-3/5 flex-col justify-center border-4 border-blue-400 p-6">
         <div
-          className="relative m-2 border-4 border-red-600"
-          style={{ height: "50%" }}
+          className="relative m-2 h-3/4 border-4 border-red-600"
+          // style={{ height: "50%" }}
         >
           <div style={{ paddingTop: "100%" }}></div>
           <div className="absolute bottom-0 left-0 right-0 top-0 p-2">
@@ -281,84 +293,94 @@ const LoggedIn = ({ user }) => {
           </div>
         </div>
         <Notification message={notification} />
-        <div className="z-10 m-6 flex flex-wrap justify-between border-2 border-green-400 p-2">
-          <Button
-            className="m-2 flex p-2"
-            onClick={() => {
-              setWebcamON(true);
-              console.log("Started Webcam!");
-            }}
-            disabled={webcamON || uploadingON ? true : false}
-          >
-            Start Webcam
-          </Button>
-          <Button
-            className="m-2 p-2"
-            onClick={() => {
-              setWebcamON(false);
-              clearCanvas();
-              removeSticker1();
-              console.log("Webcam Off!");
-            }}
-            disabled={webcamON ? false : true}
-          >
-            Stop Webcam
-          </Button>
-          <>
+        <div className="flex items-center">
+          <div className="z-10 m-6 flex w-full justify-between border-2 border-green-400 p-2">
             <Button
-              className="m-2 p-2"
+              className="m-2 flex p-2"
               onClick={() => {
-                console.log("uploading image.");
-                if (uploadingON) {
-                  clearCanvas();
-                }
-                if (!uploadingON) {
-                  fileInputRef.current.click();
-                }
+                setWebcamON(true);
+                console.log("Started Webcam!");
               }}
-              disabled={webcamON ? true : false}
+              disabled={webcamON || uploadingON ? true : false}
             >
-              {!uploadingON ? "Upload Image" : "Stop Uploading"}
-              <input
-                type="file"
-                ref={fileInputRef}
-                accept="image/*"
-                style={{ display: "none" }}
-                onChange={handleImageUpload}
-              />
+              Start Webcam
             </Button>
-          </>
+            <Button
+              className="m-2 flex p-2"
+              onClick={() => {
+                setWebcamON(false);
+                clearCanvas();
+                removeSticker1();
+                console.log("Webcam Off!");
+              }}
+              disabled={webcamON ? false : true}
+            >
+              Stop Webcam
+            </Button>
+            <>
+              <Button
+                className="m-2 flex p-2"
+                onClick={() => {
+                  console.log("uploading image.");
+                  if (uploadingON) {
+                    clearCanvas();
+                  }
+                  if (!uploadingON) {
+                    fileInputRef.current.click();
+                  }
+                }}
+                disabled={webcamON ? true : false}
+              >
+                {!uploadingON ? "Upload Image" : "Stop Uploading"}
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={handleImageUpload}
+                />
+              </Button>
+            </>
+          </div>
         </div>
       </div>
       {/* PREVIEW */}
-      <div className="lg:flex lg:h-auto lg:w-1/5 lg:flex-col lg:items-center lg:justify-start lg:border">
-        <div className="m-2 p-2">Preview:</div>
+      <div className="flex h-screen w-1/5 flex-col items-center justify-start overflow-y-scroll border border-orange-400">
+        <div className="flex h-auto w-full justify-center border-2 border-blue-300 p-2">
+          Preview:
+        </div>
+        <div className="preview my-2 h-1/4 w-full border border-yellow-200">
+          <div className="relative h-full w-full">
+            <img
+              src={previews}
+              alt="preview"
+              className="object-fit h-full w-full"
+            />
+            <div className="absolute inset-x-0 bottom-0 mx-2 flex justify-between">
+              <Button className="px-2" size="xs">
+                Use
+              </Button>
+              <Button className="px-2" size="xs">
+                Delete
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="preview my-2 h-1/4 w-full border border-yellow-200">
+          a
+        </div>
+        <div className="preview my-2 h-1/4 w-full border border-yellow-200">
+          a
+        </div>
+        <div className="preview my-2 h-1/4 w-full border border-yellow-200">
+          a
+        </div>
+        {/* <div className="m-2 p-2">Preview:</div>
         <div className="m-auto items-center overflow-y-scroll lg:h-full lg:w-full">
-          {/* <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
-            <div className="mb-2 flex h-auto flex-grow overflow-hidden rounded-md border border-yellow-200">
-              {!previews ? (
-                <img
-                  src={chinese}
-                  alt="testpic"
-                  className="flex h-full w-full object-cover"
-                />
-              ) : (
-                <img
-                  src={previews}
-                  alt="testpic"
-                  className="object-fit flex h-full w-full"
-                />
-              )}
-            </div>
-            <div className="flex justify-between">
-              <Button size="xs">Use</Button>
-              <Button size="xs">Remove</Button>
-            </div>
-          </div> */}
           <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
             <div className="mb-2 flex h-auto flex-grow rounded-md border border-yellow-200">
               <img
-                src={previews}
+                src={test}
                 alt="testpic"
                 className="object-fit flex h-full w-full"
               />
@@ -368,46 +390,7 @@ const LoggedIn = ({ user }) => {
               <Button size="xs">Delete</Button>
             </div>
           </div>
-          <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
-            <div className="mb-2 flex h-auto flex-grow rounded-md border border-yellow-200">
-              <img
-                src={chinese}
-                alt="testpic"
-                className="flex h-full w-full object-cover"
-              />
-            </div>
-            <div className="flex justify-between">
-              <Button size="xs">Use</Button>
-              <Button size="xs">Delete</Button>
-            </div>
-          </div>
-          <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
-            <div className="mb-2 flex h-auto flex-grow rounded-md border border-yellow-200">
-              <img
-                src={chinese}
-                alt="testpic"
-                className="flex h-full w-full object-cover"
-              />
-            </div>
-            <div className="flex justify-between">
-              <Button size="xs">Use</Button>
-              <Button size="xs">Delete</Button>
-            </div>
-          </div>
-          <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
-            <div className="mb-2 flex h-auto flex-grow rounded-md border border-yellow-200">
-              <img
-                src={chinese}
-                alt="testpic"
-                className="flex h-full w-full object-cover"
-              />
-            </div>
-            <div className="flex justify-between">
-              <Button size="xs">Use</Button>
-              <Button size="xs">Delete</Button>
-            </div>
-          </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

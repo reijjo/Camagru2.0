@@ -1,8 +1,7 @@
-import Nav from "./Navbar";
 const kettu = require("../img/kettu_wallpaper.jpg");
 const logo = require("../img/oldig.png");
 
-const Header = ({ user }) => {
+const Header = () => {
   return (
     <div
       className="br-cover relative bg-center"
@@ -26,7 +25,7 @@ const Header = ({ user }) => {
           </div>
         </a>
       </header>
-      <Nav user={user} />
+      {/* <Nav user={user} /> */}
     </div>
   );
 };

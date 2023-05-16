@@ -12,6 +12,8 @@ import ChangePasswd from "./components/ChangePasswd";
 import LoggedIn from "./components/LoggedIn";
 import Settings from "./components/Settings";
 import userService from "./services/userService";
+import Home from "./components/Home";
+import Nav from "./components/Navbar";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -37,24 +39,27 @@ const App = () => {
   }, []);
 
   return (
-    <div className="wrapper min-h-screen bg-gradient-to-t from-blue-300 to-blue-200">
-      <Router>
-        <Header user={user} />
-        <Routes>
-          <Route
-            path="/"
-            element={!user ? <Login updateUser={updateUser} /> : <LoggedIn />}
-          />
-          <Route path="/register" element={<Register />} />
-          <Route path="/register/:verifyCode" element={<Verify />} />
-          <Route path="/forgot" element={<Forgot />} />
-          <Route path="/forgot/:verifyCode" element={<ChangePasswd />} />
-          <Route path="/loggedIn" element={<LoggedIn user={user} />} />
-          <Route path="/settings" element={<Settings user={user} />} />
-        </Routes>
-        <Foot />
-      </Router>
-    </div>
+    // <div className="wrapper min-h-screen bg-gradient-to-t from-blue-300 to-blue-200">
+    <Router>
+      <Header />
+      <Nav user={user} />
+      <Routes>
+        {/* <Route
+          path="/"
+          element={!user ? <Login updateUser={updateUser} /> : <LoggedIn />}
+        /> */}
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/register/:verifyCode" element={<Verify />} />
+        <Route path="/login" element={<Login updateUser={updateUser} />} />
+        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/forgot/:verifyCode" element={<ChangePasswd />} />
+        <Route path="/loggedIn" element={<LoggedIn user={user} />} />
+        <Route path="/settings" element={<Settings user={user} />} />
+      </Routes>
+      <Foot />
+    </Router>
+    // </div>
   );
 };
 

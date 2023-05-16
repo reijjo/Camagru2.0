@@ -139,12 +139,13 @@ const Settings = ({ user }) => {
         // backgroundImage: `url(${chinese})`,
       }}
     >
-      <div className="mx-auto mt-12 w-auto max-w-screen-sm rounded-md bg-white p-4 px-4">
+      <div className="m-4 w-auto rounded-md bg-white p-4">
+        {/* <div className="m-2 mx-auto h-full w-auto max-w-screen-sm rounded-md bg-white p-4 px-4"> */}
         <h1 className="m-4 flex justify-center text-center text-2xl font-bold">
           Account Settings
         </h1>
         <form onSubmit={updateInfo}>
-          <div className="m-4 grid grid-cols-2 items-center px-4">
+          <div className="m-4 grid items-center px-4 lg:grid-cols-2">
             <div className="text-lg">Email:</div>
             <div className="py-2">
               <input

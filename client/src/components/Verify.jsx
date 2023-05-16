@@ -31,12 +31,12 @@ const Verify = () => {
         // backgroundImage: `url(${chinese})`,
       }}
     >
-      <div className="mx-auto mt-12 w-1/3 max-w-screen-sm rounded-md bg-white p-4 px-4">
+      <div className="mx-auto mt-12 w-auto rounded-md bg-white p-4 px-4">
         <h1 className="m-4 flex justify-center text-center text-2xl font-bold">
           {message}
         </h1>
         {user ? (
-          <div className="grid grid-cols-2">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2">
             <div className="font-bold">Username:</div>
             <div className="">{user.username}</div>
             <div className="font-bold">Email:</div>
