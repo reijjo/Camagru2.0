@@ -31,3 +31,9 @@
 .preview {
   min-height: 25%;
 }
+
+@media (max-width: 768px) {
+  .ykskuus {
+    max-height: 16vh;
+  }
+}

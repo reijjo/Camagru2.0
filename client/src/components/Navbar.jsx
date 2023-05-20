@@ -12,7 +12,7 @@ const Nav = ({ user }) => {
   };
 
   return (
-    <Navbar fluid={true} className="navilapi sticky top-0 z-10">
+    <Navbar fluid={true} className="navilapi sticky top-0 z-50">
       {!user ? (
         <>
           <div className="flex md:order-2">
@@ -38,7 +38,7 @@ const Nav = ({ user }) => {
         <>
           <div className="flex md:order-2">
             <Navbar.Toggle />
-            <Link className="px-12" to="/settings">
+            <Link className="px-4" to="/settings">
               <Button color="purple">Settings</Button>
             </Link>
             <Link to="/">
