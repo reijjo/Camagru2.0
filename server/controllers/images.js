@@ -84,4 +84,41 @@ imageRouter.post("/preview", upload.single("image"), async (req, res) => {
   });
 });
 
+// Delete preview photo
+imageRouter.delete("/preview", async (req, res) => {
+  const imageInfo = req.query.image;
+  // const imagePath = path.join(imageInfo.image.path.substring(baseUrl.length));
+  const imagePath = path.join(
+    __dirname,
+    "..",
+    imageInfo.image.path.substring(baseUrl.length)
+  );
+
+  console.log("image", imageInfo);
+  console.log("path", imagePath);
+
+  const deletedImage = await Img.findByIdAndDelete(imageInfo._id);
+  if (!deletedImage) {
+    console.log("image not found");
+  } else {
+    const user = await User.findById(deletedImage.user);
+    user.images = user.images.filter(
+      (imageId) => !imageId.equals(deletedImage._id)
+    );
+    await user.save();
+  }
+
+  if (fs.existsSync(imagePath)) {
+    fs.unlinkSync(imagePath);
+    console.log("path found!");
+  } else {
+    console.log("IMAGE PATH NOT FOUND!");
+  }
+
+  res.send({
+    message: "Preview deleted!",
+    style: { color: "red", border: "2px solid" },
+  });
+});
+
 module.exports = imageRouter;

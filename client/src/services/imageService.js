@@ -11,7 +11,7 @@ const getPreviews = async (user) => {
       userId: user.user.id,
     },
   });
-  console.log("Axios res", res);
+  // console.log("Axios res", res);
   return res.data;
 };
 
@@ -29,6 +29,14 @@ const savePreview = async (image, user) => {
   return res.data;
 };
 
-const imageService = { getPreviews, savePreview };
+const deletePreview = async (imageInfo) => {
+  console.log("Axios ImageID", imageInfo);
+  const res = await axios.delete(`${baseUrl}/preview`, {
+    params: { image: imageInfo },
+  });
+  return res.data;
+};
+
+const imageService = { getPreviews, savePreview, deletePreview };
 
 export default imageService;

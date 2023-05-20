@@ -14,10 +14,9 @@ const LoggedIn = ({ user }) => {
   const [uploadingON, setUploadingON] = useState(false);
   const [sticker1, setSticker1] = useState(false);
 
-  const [previews, setPreviews] = useState([]);
   const [previews2, setPreviews2] = useState([]);
   const [notification, setNotification] = useState(null);
-  const [test, setTest] = useState("");
+  const [getPreviews, setGetPreviews] = useState(false);
 
   const canvasRef = useRef();
   const stickerCanvasRef = useRef();
@@ -30,16 +29,14 @@ const LoggedIn = ({ user }) => {
     const fetchPreviews = async () => {
       if (user) {
         const res = await imageService.getPreviews(user);
-        // console.log("huhuu", res[12].image.path);
-        // setTest(res[15].image.path);
-        setPreviews(res[0].image.path);
-        setPreviews2(res[1].image.path);
+        setPreviews2(res);
       }
+      setGetPreviews(false);
     };
     fetchPreviews();
-  }, [user]);
+  }, [user, getPreviews]);
 
-  console.log("previews", previews);
+  console.log("previews2", previews2);
 
   useEffect(() => {
     if (webcamON && webcamRef.current) {
@@ -106,10 +103,20 @@ const LoggedIn = ({ user }) => {
         console.error("ERROR UPLOADING IMAGE", error);
       }
     };
+    setGetPreviews(true);
     savePreview();
   }, [webcamRef, webcamON, uploadingON, canvasRef, unique_id, user]);
 
-  // console.log("Preview", previews);
+  // DELETE / USE PREVIEW
+  const delPreview = async (image) => {
+    const res = await imageService.deletePreview(image);
+    console.log("Del Preview res", res);
+    setNotification({ message: res.message, style: res.style });
+    setTimeout(() => {
+      setNotification(null);
+    }, 5000);
+    setGetPreviews(true);
+  };
 
   // STICKERS
   const addSticker1 = () => {
@@ -353,24 +360,35 @@ const LoggedIn = ({ user }) => {
         <div className="hidden w-full border-2 border-blue-300 p-2 md:flex md:h-auto md:justify-center">
           Preview:
         </div>
-        <div className="preview my-2 inline-block w-64 border border-yellow-200 md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
-          <div className="relative h-full w-full">
-            <img
-              src={previews}
-              alt="preview"
-              className="object-fit h-full w-full"
-            />
-            <div className="absolute inset-x-0 bottom-0 mx-2 flex justify-between border-4 border-green-400">
-              <Button className="flex md:px-2" size="xs">
-                Use
-              </Button>
-              <Button className="flex md:px-2" size="xs">
-                Delete
-              </Button>
-            </div>
-          </div>
-        </div>
-        <div className="preview my-2 inline-block w-64 border border-yellow-200 md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
+        {previews2
+          ? previews2.map((p) => (
+              <div
+                className="preview mx-2 my-2 inline-block w-64 border border-yellow-200 md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center"
+                key={p._id}
+              >
+                <div className="relative h-full w-full">
+                  <img
+                    src={p.image.path}
+                    alt="preview"
+                    className="object-fit h-full w-full"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 mx-2 flex justify-between border-4 border-green-400">
+                    <Button className="flex md:px-2" size="xs">
+                      Use
+                    </Button>
+                    <Button
+                      className="flex md:px-2"
+                      size="xs"
+                      onClick={() => delPreview(p)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))
+          : null}
+        {/* <div className="preview my-2 inline-block w-64 border border-yellow-200 md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
           <div className="relative h-full w-full">
             <img
               src={previews2}
@@ -392,7 +410,7 @@ const LoggedIn = ({ user }) => {
         </div>
         <div className="preview my-2 inline-block w-64 border border-yellow-200 md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
           a
-        </div>
+        </div> */}
         {/* <div className="m-2 p-2">Preview:</div>
         <div className="m-auto items-center overflow-y-scroll lg:h-full lg:w-full">
           <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
