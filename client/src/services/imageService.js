@@ -37,6 +37,25 @@ const deletePreview = async (imageInfo) => {
   return res.data;
 };
 
-const imageService = { getPreviews, savePreview, deletePreview };
+const getImage = async (id) => {
+  console.log("Axios Id", id);
+  const res = await axios.get(`${baseUrl}/loggedIn/${id}`);
+  console.log("Axios res", res);
+  return res.data;
+};
+
+const makePost = async (desc, id) => {
+  console.log("Axios", desc, id);
+  const res = await axios.put(`${baseUrl}/loggedIn/${id}`, desc);
+  return res.data;
+};
+
+const imageService = {
+  getPreviews,
+  savePreview,
+  deletePreview,
+  getImage,
+  makePost,
+};
 
 export default imageService;

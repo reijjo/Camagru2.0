@@ -1,5 +1,5 @@
-const kettu = require("../img/kettu_wallpaper.jpg");
-const logo = require("../img/oldig.png");
+const kettu = require("../../img/kettu_wallpaper.jpg");
+const logo = require("../../img/oldig.png");
 
 const Header = () => {
   return (

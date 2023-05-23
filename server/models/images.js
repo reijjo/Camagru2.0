@@ -4,6 +4,7 @@ const imageSchema = mongoose.Schema({
   image: {
     path: String,
     posted: Boolean,
+    desc: String,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

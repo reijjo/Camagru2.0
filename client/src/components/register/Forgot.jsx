@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "flowbite-react";
-import userService from "../services/userService";
+import userService from "../../services/userService";
 
-const confetti = require("../img/confetti.png");
+const confetti = require("../../img/confetti.png");
 
 const Verify = () => {
   const [email, setEmail] = useState("");

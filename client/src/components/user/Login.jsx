@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Label, TextInput, Button } from "flowbite-react";
-import loginService from "../services/loginService";
-import Notification from "./Notification";
-const confetti = require("../img/confetti.png");
+import loginService from "../../services/loginService";
+import Notification from "../common/Notification";
+const confetti = require("../../img/confetti.png");
 // const tabbied = require("../img/tabbied.png");
 // const chinese = require("../img/pattern_chinese.png");
 

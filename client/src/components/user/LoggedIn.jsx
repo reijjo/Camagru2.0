@@ -1,13 +1,14 @@
 import Webcam from "react-webcam";
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "flowbite-react";
 import { v4 as uuid } from "uuid";
-import Notification from "../components/Notification";
-import imageService from "../services/imageService";
+import Notification from "../common/Notification";
+import imageService from "../../services/imageService";
 
-const confetti = require("../img/confetti.png");
-const trees = require("../img/puut.png");
-const viritys = require("../img/Telefunken_FuBK.png");
+const confetti = require("../../img/confetti.png");
+const trees = require("../../img/puut.png");
+const viritys = require("../../img/Telefunken_FuBK.png");
 
 const LoggedIn = ({ user }) => {
   const [webcamON, setWebcamON] = useState(false);
@@ -24,6 +25,7 @@ const LoggedIn = ({ user }) => {
   const webcamRef = useRef();
 
   const unique_id = uuid();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPreviews = async () => {
@@ -116,6 +118,11 @@ const LoggedIn = ({ user }) => {
       setNotification(null);
     }, 5000);
     setGetPreviews(true);
+  };
+
+  const addPreview = async (image) => {
+    console.log("image", image);
+    navigate(`/loggedIn/${image._id}`);
   };
 
   // STICKERS
@@ -373,7 +380,11 @@ const LoggedIn = ({ user }) => {
                     className="object-fit h-full w-full"
                   />
                   <div className="absolute inset-x-0 bottom-0 mx-2 flex justify-between border-4 border-green-400">
-                    <Button className="flex md:px-2" size="xs">
+                    <Button
+                      className="flex md:px-2"
+                      size="xs"
+                      onClick={() => addPreview(p)}
+                    >
                       Use
                     </Button>
                     <Button

@@ -1,5 +1,5 @@
 import { Footer } from "flowbite-react";
-const kettu = require("../img/kettu_wallpaper.jpg");
+const kettu = require("../../img/kettu_wallpaper.jpg");
 
 const Foot = () => {
   return (

@@ -2,18 +2,19 @@ import { useEffect, useState } from "react";
 // import testService from "./services/axiosStuff";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "./components/Header";
-import Foot from "./components/Footer";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Verify from "./components/Verify";
-import Forgot from "./components/Forgot";
-import ChangePasswd from "./components/ChangePasswd";
-import LoggedIn from "./components/LoggedIn";
-import Settings from "./components/Settings";
+import Header from "./components/common/Header";
+import Foot from "./components/common/Footer";
+import Login from "./components/user/Login";
+import Register from "./components/register/Register";
+import Verify from "./components/register/Verify";
+import Forgot from "./components/register/Forgot";
+import ChangePasswd from "./components/register/ChangePasswd";
+import LoggedIn from "./components/user/LoggedIn";
+import Settings from "./components/user/Settings";
 import userService from "./services/userService";
 import Home from "./components/Home";
-import Nav from "./components/Navbar";
+import Nav from "./components/common/Navbar";
+import AddPost from "./components/user/AddPost";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/forgot/:verifyCode" element={<ChangePasswd />} />
         <Route path="/loggedIn" element={<LoggedIn user={user} />} />
+        <Route path="/loggedIn/:id" element={<AddPost user={user} />} />
         <Route path="/settings" element={<Settings user={user} />} />
       </Routes>
       <Foot />

@@ -1,8 +1,8 @@
 import { Label, TextInput, Button } from "flowbite-react";
 import { useState } from "react";
-import userService from "../services/userService";
-import Notification from "./Notification";
-const confetti = require("../img/confetti.png");
+import userService from "../../services/userService";
+import Notification from "../common/Notification";
+const confetti = require("../../img/confetti.png");
 
 const Register = () => {
   const [email, setEmail] = useState("");

@@ -69,6 +69,7 @@ imageRouter.post("/preview", upload.single("image"), async (req, res) => {
     image: {
       path: `${baseUrl}/uploads/${relativePath}`,
       posted: false,
+      desc: "",
     },
     user: db_user._id,
   });
@@ -119,6 +120,47 @@ imageRouter.delete("/preview", async (req, res) => {
     message: "Preview deleted!",
     style: { color: "red", border: "2px solid" },
   });
+});
+
+// loggedIn/:id
+
+imageRouter.get("/loggedIn/:id", async (req, res) => {
+  const imageId = req.params.id;
+  console.log("IMAGEID", imageId);
+
+  try {
+    const result = await Img.findOne({ _id: imageId });
+    console.log("resul", result);
+    res.json(result);
+  } catch (error) {
+    console.log("Error getting image", error);
+    return res.json({ message: "fail" });
+  }
+});
+
+imageRouter.put("/loggedIn/:id", async (req, res) => {
+  const imageId = req.params.id;
+  const desc = req.body.desc;
+
+  console.log("imageId", imageId);
+  console.log("imagedsc", desc);
+
+  const update = { "image.posted": true, "image.desc": desc };
+
+  const image = await Img.findOneAndUpdate(
+    { _id: imageId },
+    update,
+    {
+      new: true,
+    }
+    // { _id: imageId },
+    // { posted: true, desc: desc },
+    // { new: true }
+  );
+  console.log("image", image);
+  console.log("image DESC", image.image.desc);
+  console.log("image POSTED", image.image.posted);
+  res.json(image);
 });
 
 module.exports = imageRouter;

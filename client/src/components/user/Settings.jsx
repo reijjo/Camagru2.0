@@ -1,9 +1,9 @@
 import { Button } from "flowbite-react";
 import { useEffect, useState } from "react";
-import userService from "../services/userService";
-import Notification from "./Notification";
+import userService from "../../services/userService";
+import Notification from "../common/Notification";
 
-const confetti = require("../img/confetti.png");
+const confetti = require("../../img/confetti.png");
 
 const Settings = ({ user }) => {
   const [loading, setLoading] = useState(true);
