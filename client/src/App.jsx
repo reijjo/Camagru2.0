@@ -49,15 +49,24 @@ const App = () => {
           path="/"
           element={!user ? <Login updateUser={updateUser} /> : <LoggedIn />}
         /> */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home user={user} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/register/:verifyCode" element={<Verify />} />
         <Route path="/login" element={<Login updateUser={updateUser} />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/forgot/:verifyCode" element={<ChangePasswd />} />
-        <Route path="/loggedIn" element={<LoggedIn user={user} />} />
-        <Route path="/loggedIn/:id" element={<AddPost user={user} />} />
-        <Route path="/settings" element={<Settings user={user} />} />
+        <Route
+          path="/loggedIn"
+          element={user ? <LoggedIn user={user} /> : <Home />}
+        />
+        <Route
+          path="/loggedIn/:id"
+          element={user ? <AddPost user={user} /> : <Home />}
+        />
+        <Route
+          path="/settings"
+          element={user ? <Settings user={user} /> : <Home />}
+        />
       </Routes>
       <Foot />
     </Router>

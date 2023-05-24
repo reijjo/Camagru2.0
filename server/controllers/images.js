@@ -70,6 +70,7 @@ imageRouter.post("/preview", upload.single("image"), async (req, res) => {
       path: `${baseUrl}/uploads/${relativePath}`,
       posted: false,
       desc: "",
+      comments: [],
     },
     user: db_user._id,
   });
@@ -161,6 +162,16 @@ imageRouter.put("/loggedIn/:id", async (req, res) => {
   console.log("image DESC", image.image.desc);
   console.log("image POSTED", image.image.posted);
   res.json(image);
+});
+
+// Get Images For Feed
+imageRouter.get("/", async (req, res) => {
+  try {
+    const result = await Img.find({ "image.posted": true });
+    res.json(result);
+  } catch (error) {
+    console.log("Error getting images for feed: ", error);
+  }
 });
 
 module.exports = imageRouter;

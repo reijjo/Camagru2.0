@@ -50,12 +50,18 @@ const makePost = async (desc, id) => {
   return res.data;
 };
 
+const getFromDb = async () => {
+  const res = await axios.get(baseUrl);
+  return res.data;
+};
+
 const imageService = {
   getPreviews,
   savePreview,
   deletePreview,
   getImage,
   makePost,
+  getFromDb,
 };
 
 export default imageService;

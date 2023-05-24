@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "flowbite-react";
 import { useParams, useNavigate } from "react-router-dom";
 import imageService from "../../services/imageService";
-import Notification from "../common/Notification";
+// import Notification from "../common/Notification";
 
 const confetti = require("../../img/confetti.png");
 
@@ -13,7 +13,7 @@ const AddPost = ({ user }) => {
 
   const [image, setImage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [notification, setNotification] = useState(null);
+  // const [notification, setNotification] = useState(null);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -33,8 +33,8 @@ const AddPost = ({ user }) => {
     findImage(id);
   }, [id, navigate]);
 
-  console.log("Confetti user", user);
-  console.log("Image", image);
+  // console.log("Confetti user", user);
+  // console.log("Image", image);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,6 +44,7 @@ const AddPost = ({ user }) => {
     console.log("des", description, image._id);
     const res = await imageService.makePost(description, image._id);
     console.log("BAAACKKK", res);
+    navigate("/");
   };
 
   const handleDesc = (event) => {
@@ -77,9 +78,13 @@ const AddPost = ({ user }) => {
         className="rounded-md border-2 border-red-600 bg-slate-200 md:flex md:h-4/5 md:w-4/5 md:flex-col md:items-center md:justify-center"
       >
         <div className="border-2 border-orange-400 p-1 md:m-4 md:flex md:aspect-square md:w-3/4">
-          <img src={image.image.path} alt="preview" />
+          <img
+            src={image.image.path}
+            alt="preview"
+            className="object-fit h-full w-full"
+          />
         </div>
-        <Notification notification={notification} />
+        {/* <Notification notification={notification} /> */}
         <div className="border-2 border-violet-400 md:m-2 md:flex md:h-auto md:w-3/5 md:p-1">
           <input
             type="text"
@@ -100,7 +105,7 @@ const AddPost = ({ user }) => {
             <li>{descLenMsg}</li>
           </div>
         )}
-        <div className="border-2 border-violet-400 md:m-2 md:flex md:h-auto md:w-2/5 md:justify-between md:p-1">
+        <div className="flex flex-row justify-between border-2 border-violet-400 md:m-2 md:flex md:h-auto md:w-2/5 md:justify-between md:p-1">
           <Button type="submit">post</Button>
           <Button
             className="border-2 border-gray-500"

@@ -11,6 +11,7 @@
 .oma {
   color: var(--color4);
   /* color: green */
+  background-color: var(--color1);
 }
 
 .navilapi {
