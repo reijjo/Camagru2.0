@@ -6,6 +6,10 @@ const commentSchema = mongoose.Schema({
     ref: "User",
   },
   comment: String,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const imageSchema = mongoose.Schema({
@@ -18,6 +22,10 @@ const imageSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 

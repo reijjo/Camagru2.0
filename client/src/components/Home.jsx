@@ -32,6 +32,22 @@ const Home = ({ user }) => {
     return <div>loading...</div>;
   }
 
+  const formatDate = (date) => {
+    const dateObj = new Date(date);
+    const day = String(dateObj.getUTCDate()).padStart(2, "0");
+    const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+    const year = dateObj.getUTCFullYear();
+
+    const hours = String(dateObj.getUTCHours()).padStart(2, "0");
+    const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
+    const seconds = String(dateObj.getUTCSeconds()).padStart(2, "0");
+
+    return {
+      time: `${hours}:${minutes}:${seconds}`,
+      date: `${day}/${month}/${year} `,
+    };
+  };
+
   return (
     <div
       className="flex min-h-screen flex-col items-center pb-4"
@@ -77,7 +93,9 @@ const Home = ({ user }) => {
           <div className="h-32 w-full border-2 border-orange-600">
             all the comments
           </div>
-          <div className="oma h-8 w-full border-2 border-orange-700 pb-2"></div>
+          <div className="oma h-8 w-full border-2 border-orange-700 pb-2 text-white">
+            {formatDate(post.createdAt).time} {formatDate(post.createdAt).date}
+          </div>
         </div>
       ))}
     </div>

@@ -146,7 +146,13 @@ imageRouter.put("/loggedIn/:id", async (req, res) => {
   console.log("imageId", imageId);
   console.log("imagedsc", desc);
 
-  const update = { "image.posted": true, "image.desc": desc };
+  const updatedTime = new Date();
+
+  const update = {
+    "image.posted": true,
+    "image.desc": desc,
+    createdAt: updatedTime,
+  };
 
   const image = await Img.findOneAndUpdate(
     { _id: imageId },
@@ -167,7 +173,9 @@ imageRouter.put("/loggedIn/:id", async (req, res) => {
 // Get Images For Feed
 imageRouter.get("/", async (req, res) => {
   try {
-    const result = await Img.find({ "image.posted": true });
+    const result = await Img.find({ "image.posted": true }).sort({
+      createdAt: -1,
+    });
     res.json(result);
   } catch (error) {
     console.log("Error getting images for feed: ", error);
