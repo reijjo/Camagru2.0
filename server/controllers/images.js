@@ -124,7 +124,6 @@ imageRouter.delete("/preview", async (req, res) => {
 });
 
 // loggedIn/:id
-
 imageRouter.get("/loggedIn/:id", async (req, res) => {
   const imageId = req.params.id;
   console.log("IMAGEID", imageId);
@@ -181,5 +180,8 @@ imageRouter.get("/", async (req, res) => {
     console.log("Error getting images for feed: ", error);
   }
 });
+
+// COMMENTS
+imageRouter.post("/comment", async (req, res) => {});
 
 module.exports = imageRouter;

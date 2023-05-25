@@ -55,6 +55,12 @@ const getFromDb = async () => {
   return res.data;
 };
 
+const addComment = async (comment, imageId, user) => {
+  console.log("Axios addComment", comment, imageId, user.user.id);
+  const res = await axios.post(`${baseUrl}/comment`);
+  return res.data;
+};
+
 const imageService = {
   getPreviews,
   savePreview,
@@ -62,6 +68,7 @@ const imageService = {
   getImage,
   makePost,
   getFromDb,
+  addComment,
 };
 
 export default imageService;

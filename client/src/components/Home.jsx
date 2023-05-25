@@ -11,7 +11,6 @@ const Home = ({ user }) => {
   // const [commentsFromDb, setCommentsFromDb] = useState([]);
 
   useEffect(() => {
-    console.log("TOIMIIKS");
     const feedImages = async () => {
       const res = await imageService.getFromDb();
       setImagesFromDb(res);
@@ -19,13 +18,14 @@ const Home = ({ user }) => {
     feedImages();
   }, [comment]);
 
-  const addComment = (event) => {
-    event.preventDefault();
-    console.log(comment);
+  const addComment = (id) => {
+    // event.preventDefault();
+    console.log("imageid", id);
+    console.log("comment", comment);
     setComment("");
   };
 
-  console.log("user", user);
+  // console.log("user", user);
   console.log("Feed Imgs", imagesFromDb);
 
   if (!imagesFromDb.length) {
@@ -34,13 +34,21 @@ const Home = ({ user }) => {
 
   const formatDate = (date) => {
     const dateObj = new Date(date);
-    const day = String(dateObj.getUTCDate()).padStart(2, "0");
-    const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
-    const year = dateObj.getUTCFullYear();
+    const day = String(dateObj.getDate()).padStart(2, "0");
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const year = dateObj.getFullYear();
 
-    const hours = String(dateObj.getUTCHours()).padStart(2, "0");
-    const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
-    const seconds = String(dateObj.getUTCSeconds()).padStart(2, "0");
+    const hours = String(dateObj.getHours()).padStart(2, "0");
+    const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+    const seconds = String(dateObj.getSeconds()).padStart(2, "0");
+
+    // const day = String(dateObj.getUTCDate()).padStart(2, "0");
+    // const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+    // const year = dateObj.getUTCFullYear();
+
+    // const hours = String(dateObj.getUTCHours()).padStart(2, "0");
+    // const minutes = String(dateObj.getUTCMinutes()).padStart(2, "0");
+    // const seconds = String(dateObj.getUTCSeconds()).padStart(2, "0");
 
     return {
       time: `${hours}:${minutes}:${seconds}`,
@@ -85,7 +93,7 @@ const Home = ({ user }) => {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
               />
-              <Button className="w-auto" onClick={addComment}>
+              <Button className="w-auto" onClick={() => addComment(post._id)}>
                 Add
               </Button>
             </div>
@@ -93,7 +101,7 @@ const Home = ({ user }) => {
           <div className="h-32 w-full border-2 border-orange-600">
             all the comments
           </div>
-          <div className="oma h-8 w-full border-2 border-orange-700 pb-2 text-white">
+          <div className="oma h-8 w-full border-2 border-orange-700 pb-2 pr-2 text-right text-white">
             {formatDate(post.createdAt).time} {formatDate(post.createdAt).date}
           </div>
         </div>
