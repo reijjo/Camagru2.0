@@ -182,6 +182,44 @@ imageRouter.get("/", async (req, res) => {
 });
 
 // COMMENTS
-imageRouter.post("/comment", async (req, res) => {});
+imageRouter.post("/comment", async (req, res) => {
+  const { comment, imageId, user } = req.body;
+  console.log("comment", comment);
+  console.log("imageId", imageId);
+  console.log("user", user);
+
+  try {
+    const image = await Img.findById(imageId);
+    console.log("image from db", image);
+
+    const userName = await User.findById(user);
+    console.log("user from db", userName.username);
+
+    const newComment = {
+      user: user,
+      comment: comment,
+    };
+
+    image.image.comments.push(newComment);
+
+    await image.save();
+
+    res.send({ message: "Comment added succesfully!" });
+  } catch (error) {
+    console.error("Error adding comment:", error);
+    res.status(500).send({ error: "failed to add comment." });
+  }
+});
+
+imageRouter.get("/comment", async (req, res) => {
+  const imageId = req.query.imageId;
+  try {
+    const image = await Img.findById(imageId).populate("image.comments.user");
+    res.json(image.image.comments);
+  } catch (error) {
+    console.error("Error retrieving comments:", error);
+    res.status(500).send({ error: "Failed to retrieve comments" });
+  }
+});
 
 module.exports = imageRouter;

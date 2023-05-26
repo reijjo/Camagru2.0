@@ -5,28 +5,48 @@ import imageService from "../services/imageService";
 const confetti = require("../img/confetti.png");
 
 const Home = ({ user }) => {
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState({});
+  const [clearInput, setClearInput] = useState(false);
 
   const [imagesFromDb, setImagesFromDb] = useState([]);
-  // const [commentsFromDb, setCommentsFromDb] = useState([]);
+  const [commentsFromDb, setCommentsFromDb] = useState([]);
 
   useEffect(() => {
     const feedImages = async () => {
       const res = await imageService.getFromDb();
       setImagesFromDb(res);
+      setClearInput(false);
     };
+    // const feedComments = async (id) => {
+    //   console.log("feedcommen id", id);
+    //   const res = await imageService.getComments(id);
+    //   console.log("comments", res);
+    // };
     feedImages();
+    // feedComments();
   }, [comment]);
 
-  const addComment = (id) => {
+  const addComment = async (id) => {
     // event.preventDefault();
     console.log("imageid", id);
     console.log("comment", comment);
-    setComment("");
+
+    const res = await imageService.addComment(comment[id], id, user.user.id);
+    console.log("add comment res", res);
+
+    setComment({ ...comment, [id]: "" });
+    setClearInput(true);
   };
 
   // console.log("user", user);
-  console.log("Feed Imgs", imagesFromDb);
+  // console.log("Feed Imgs", imagesFromDb);
+  // if (imagesFromDb || imagesFromDb.image) {
+  //   console.log("Feed Imgs", imagesFromDb[0].image.comments);
+  //   console.log(
+  //     "comment test",
+  //     imagesFromDb[0].image.comments.map((comments) => comments.comment)
+  //   );
+  // }
 
   if (!imagesFromDb.length) {
     return <div>loading...</div>;
@@ -56,6 +76,14 @@ const Home = ({ user }) => {
     };
   };
 
+  const handleInputChange = (e, id) => {
+    setComment({ ...comment, [id]: e.target.value });
+  };
+
+  if (!imagesFromDb) {
+    return <div>loading...</div>;
+  }
+
   return (
     <div
       className="flex min-h-screen flex-col items-center pb-4"
@@ -84,14 +112,18 @@ const Home = ({ user }) => {
               className="h-full w-full"
             />
           </div>
+          <div className="oma h-8 w-full border-2 border-orange-700 px-2 pb-2 text-left text-white">
+            {post.image.desc}
+          </div>
           {user ? (
             <div className="flex h-12 w-full flex-row border-2 border-orange-500">
               <input
                 type="text"
                 placeholder="add comment..."
                 className="h-auto flex-grow"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                // value={comment[post._id]}
+                value={!clearInput ? comment[post._id] || "" : ""}
+                onChange={(e) => handleInputChange(e, post._id)}
               />
               <Button className="w-auto" onClick={() => addComment(post._id)}>
                 Add
@@ -100,6 +132,12 @@ const Home = ({ user }) => {
           ) : null}
           <div className="h-32 w-full border-2 border-orange-600">
             all the comments
+            {post.image.comments.map((comments) => (
+              <div key={comments._id}>
+                <strong>{comments.user}</strong>
+                {comments.comment}
+              </div>
+            ))}
           </div>
           <div className="oma h-8 w-full border-2 border-orange-700 pb-2 pr-2 text-right text-white">
             {formatDate(post.createdAt).time} {formatDate(post.createdAt).date}
