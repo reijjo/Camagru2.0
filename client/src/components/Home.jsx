@@ -9,21 +9,15 @@ const Home = ({ user }) => {
   const [clearInput, setClearInput] = useState(false);
 
   const [imagesFromDb, setImagesFromDb] = useState([]);
-  const [commentsFromDb, setCommentsFromDb] = useState([]);
+  const [commentUser, setCommentUser] = useState([]);
 
   useEffect(() => {
     const feedImages = async () => {
       const res = await imageService.getFromDb();
-      setImagesFromDb(res);
+      setImagesFromDb(res.image);
       setClearInput(false);
     };
-    // const feedComments = async (id) => {
-    //   console.log("feedcommen id", id);
-    //   const res = await imageService.getComments(id);
-    //   console.log("comments", res);
-    // };
     feedImages();
-    // feedComments();
   }, [comment]);
 
   const addComment = async (id) => {
@@ -38,15 +32,7 @@ const Home = ({ user }) => {
     setClearInput(true);
   };
 
-  // console.log("user", user);
-  // console.log("Feed Imgs", imagesFromDb);
-  // if (imagesFromDb || imagesFromDb.image) {
-  //   console.log("Feed Imgs", imagesFromDb[0].image.comments);
-  //   console.log(
-  //     "comment test",
-  //     imagesFromDb[0].image.comments.map((comments) => comments.comment)
-  //   );
-  // }
+  console.log("imma", imagesFromDb);
 
   if (!imagesFromDb.length) {
     return <div>loading...</div>;
@@ -134,7 +120,7 @@ const Home = ({ user }) => {
             all the comments
             {post.image.comments.map((comments) => (
               <div key={comments._id}>
-                <strong>{comments.user}</strong>
+                <strong>{comments.user.username}</strong>
                 {comments.comment}
               </div>
             ))}

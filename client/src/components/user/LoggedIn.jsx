@@ -399,45 +399,6 @@ const LoggedIn = ({ user }) => {
               </div>
             ))
           : null}
-        {/* <div className="preview my-2 inline-block w-64 border border-yellow-200 md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
-          <div className="relative h-full w-full">
-            <img
-              src={previews2}
-              alt="preview"
-              className="object-fit h-full w-full"
-            />
-            <div className="absolute inset-x-0 bottom-0 mx-2 flex justify-between border-4 border-green-400">
-              <Button className="flex md:px-2" size="xs">
-                Use
-              </Button>
-              <Button className="flex md:px-2" size="xs">
-                Delete
-              </Button>
-            </div>
-          </div>
-        </div>
-        <div className="preview my-2 inline-block w-64 border border-yellow-200 md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
-          a
-        </div>
-        <div className="preview my-2 inline-block w-64 border border-yellow-200 md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
-          a
-        </div> */}
-        {/* <div className="m-2 p-2">Preview:</div>
-        <div className="m-auto items-center overflow-y-scroll lg:h-full lg:w-full">
-          <div className="mx-auto mb-2 flex flex-col border border-red-400 p-2 lg:h-1/4 lg:w-3/4">
-            <div className="mb-2 flex h-auto flex-grow rounded-md border border-yellow-200">
-              <img
-                src={test}
-                alt="testpic"
-                className="object-fit flex h-full w-full"
-              />
-            </div>
-            <div className="flex justify-between">
-              <Button size="xs">Use</Button>
-              <Button size="xs">Delete</Button>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

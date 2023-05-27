@@ -31,12 +31,18 @@ const upload = multer({ storage: storage });
 // Get preview photos
 imageRouter.get("/preview", async (req, res) => {
   const userId = req.query.userId;
+  console.log("userID", userId);
 
   const user = await User.findById(userId).populate("images");
-  // console.log("imAGEE", user);
+  console.log("imAGEE", user);
 
+  // const images = await Img.findById(user._id);
   const images = await Img.find({ user: userId });
+
+  // console.log("images", images);
   const previews = images.filter((images) => images.image.posted === false);
+
+  console.log("pre", previews);
 
   res.json(previews);
 });
@@ -63,7 +69,11 @@ imageRouter.post("/preview", upload.single("image"), async (req, res) => {
   );
   console.log("relativePath", `${baseUrl}/uploads/${relativePath}`);
 
-  const db_user = await User.findOne(user.id);
+  console.log("user", user.user.id);
+
+  const db_user = await User.findById(user.user.id);
+
+  console.log("db_user", db_user);
 
   const previewImage = new Img({
     image: {
@@ -172,10 +182,13 @@ imageRouter.put("/loggedIn/:id", async (req, res) => {
 // Get Images For Feed
 imageRouter.get("/", async (req, res) => {
   try {
-    const result = await Img.find({ "image.posted": true }).sort({
-      createdAt: -1,
-    });
-    res.json(result);
+    const result = await Img.find({ "image.posted": true })
+      .sort({
+        createdAt: -1,
+      })
+      .populate({ path: "image.comments.user", model: "User" });
+
+    res.json({ image: result });
   } catch (error) {
     console.log("Error getting images for feed: ", error);
   }
@@ -215,7 +228,9 @@ imageRouter.get("/comment", async (req, res) => {
   const imageId = req.query.imageId;
   try {
     const image = await Img.findById(imageId).populate("image.comments.user");
-    res.json(image.image.comments);
+
+    console.log("username", username);
+    res.json({ image: image.image.comments, username: username });
   } catch (error) {
     console.error("Error retrieving comments:", error);
     res.status(500).send({ error: "Failed to retrieve comments" });
