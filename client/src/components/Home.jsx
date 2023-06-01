@@ -1,6 +1,7 @@
 import { Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import imageService from "../services/imageService";
+import userService from "../services/userService";
 
 const confetti = require("../img/confetti.png");
 
@@ -9,14 +10,17 @@ const Home = ({ user }) => {
   const [clearInput, setClearInput] = useState(false);
 
   const [imagesFromDb, setImagesFromDb] = useState([]);
-  const [commentUser, setCommentUser] = useState([]);
+  const [postUser, setPostUser] = useState([]);
 
   useEffect(() => {
     const feedImages = async () => {
       const res = await imageService.getFromDb();
+      const res2 = await userService.getUsers();
       setImagesFromDb(res.image);
+      setPostUser(res2);
       setClearInput(false);
     };
+
     feedImages();
   }, [comment]);
 
@@ -33,6 +37,7 @@ const Home = ({ user }) => {
   };
 
   console.log("imma", imagesFromDb);
+  console.log("user", postUser);
 
   if (!imagesFromDb.length) {
     return <div>loading...</div>;
@@ -66,6 +71,17 @@ const Home = ({ user }) => {
     setComment({ ...comment, [id]: e.target.value });
   };
 
+  const findUsername = (postId) => {
+    const post = imagesFromDb.find((p) => p.user === postId);
+    if (post) {
+      const user = postUser.find((u) => u.id === post.user);
+      if (user) {
+        return user.username;
+      }
+    }
+    return "";
+  };
+
   if (!imagesFromDb) {
     return <div>loading...</div>;
   }
@@ -88,9 +104,11 @@ const Home = ({ user }) => {
           key={post._id}
           className="mb-4 mt-4 flex h-2/3 w-1/2 flex-col items-center justify-center rounded-md border-4 border-white bg-cyan-800"
         >
+          {/* USERNAME */}
           <div className="oma mb-2 h-8 w-full border-2 border-orange-300 pl-2">
-            Username
+            {findUsername(post.user)}
           </div>
+          {/* IMAGE */}
           <div className="mb-2 h-64 w-3/4 border-2 border-orange-400">
             <img
               src={post.image.path}
@@ -98,9 +116,11 @@ const Home = ({ user }) => {
               className="h-full w-full"
             />
           </div>
+          {/* DESCRIPTION */}
           <div className="oma h-8 w-full border-2 border-orange-700 px-2 pb-2 text-left text-white">
             {post.image.desc}
           </div>
+          {/* COMMENT FIELD */}
           {user ? (
             <div className="flex h-12 w-full flex-row border-2 border-orange-500">
               <input
@@ -116,15 +136,21 @@ const Home = ({ user }) => {
               </Button>
             </div>
           ) : null}
-          <div className="h-32 w-full border-2 border-orange-600">
-            all the comments
+          {/* COMMENTS */}
+          <div className="h-48 w-full overflow-auto border-2 border-orange-600">
+            {/* all the comments */}
             {post.image.comments.map((comments) => (
-              <div key={comments._id}>
-                <strong>{comments.user.username}</strong>
-                {comments.comment}
+              <div key={comments._id} className="grid grid-cols-2">
+                <strong className="mr-4 border border-blue-400">
+                  {comments.user.username}
+                </strong>
+                <div className="whitespace-pre-wrap border border-red-400">
+                  {comments.comment}
+                </div>
               </div>
             ))}
           </div>
+          {/* PUBLISH TIME */}
           <div className="oma h-8 w-full border-2 border-orange-700 pb-2 pr-2 text-right text-white">
             {formatDate(post.createdAt).time} {formatDate(post.createdAt).date}
           </div>
