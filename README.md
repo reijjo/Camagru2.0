@@ -20,3 +20,10 @@ Updated version of Camagru using React, Node.js, Express.js and MongoDB.
 
 ## How to use:
 
+# TODO
+* like button
+* my images
+* infinite scroll (pagination)
+* stickers (resize + draggable)
+* webcam quality
+* ui
