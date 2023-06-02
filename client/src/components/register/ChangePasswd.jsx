@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import userService from "../../services/userService";
 import Notification from "../common/Notification";
 
-const confetti = require("../../img/confetti.png");
+// const confetti = require("../../img/confetti.png");
 
 const ChangePasswd = () => {
   const { verifyCode } = useParams();
@@ -113,11 +113,11 @@ const ChangePasswd = () => {
 
   return (
     <div
-      className="flex h-screen items-start justify-center rounded-sm bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${confetti})`,
-        // backgroundImage: `url(${chinese})`,
-      }}
+      className="oma1 flex h-screen items-start justify-center rounded-sm bg-cover bg-center"
+      // style={{
+      //   backgroundImage: `url(${confetti})`,
+      //   // backgroundImage: `url(${chinese})`,
+      // }}
     >
       <div className="mx-auto mt-12 w-auto max-w-screen-sm rounded-md bg-white p-4 px-4">
         {user ? (

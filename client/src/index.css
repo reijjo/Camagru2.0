@@ -5,8 +5,8 @@
 @import "tailwindcss/utilities";
 /* @import "./custom-utilities.css"; */
 
-/* @import url('css/palette1.css'); */
-@import url("css/palette2.css");
+@import url("css/palette1.css");
+/* @import url("css/palette2.css"); */
 
 .oma {
   color: var(--color4);
@@ -14,14 +14,38 @@
   background-color: var(--color1);
 }
 
+.oma1 {
+  background-color: var(--color1);
+}
+
+.oma2 {
+  background-color: var(--color2);
+}
+
+.oma3 {
+  background-color: var(--color3);
+}
+
+.oma4 {
+  background-color: var(--color4);
+}
+
 .navilapi {
-  background-color: lightblue;
+  background-color: var(--color4);
   /* background-color: transparent; */
+  color: white;
+}
+
+.post {
+  background-color: var(--color3);
+  border: 2px solid var(--color2);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .info {
   /* color: green; */
-  background: lightgray;
+  background: white;
   font-size: 20px;
   border-style: solid;
   border-radius: 5px;

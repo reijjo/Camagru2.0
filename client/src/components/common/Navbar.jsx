@@ -36,9 +36,9 @@ const Nav = ({ user }) => {
         </>
       ) : (
         <>
-          <div className="flex md:order-2">
+          <div className="navilapi flex text-white md:order-2">
             <Navbar.Toggle />
-            <Link className="px-4" to="/settings">
+            <Link className="navilapi px-4" to="/settings">
               <Button color="purple">Settings</Button>
             </Link>
             <Link to="/">
@@ -53,10 +53,12 @@ const Nav = ({ user }) => {
             </Link>
           </div>
           <Navbar.Collapse>
-            <Navbar.Link href="/" active={true}>
+            <Navbar.Link className="navilapi hoverlink" href="/">
               Home
             </Navbar.Link>
-            <Navbar.Link href="/loggedIn">Add Photo</Navbar.Link>
+            <Navbar.Link className="navilapi" href="/loggedIn">
+              Add Photo
+            </Navbar.Link>
           </Navbar.Collapse>
         </>
       )}

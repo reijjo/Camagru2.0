@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import userService from "../../services/userService";
 import Notification from "../common/Notification";
 
-const confetti = require("../../img/confetti.png");
+// const confetti = require("../../img/confetti.png");
 
 const Settings = ({ user }) => {
   const [loading, setLoading] = useState(true);
@@ -133,11 +133,11 @@ const Settings = ({ user }) => {
 
   return (
     <div
-      className="flex h-screen items-start justify-center rounded-sm bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${confetti})`,
-        // backgroundImage: `url(${chinese})`,
-      }}
+      className="oma1 flex h-screen items-start justify-center rounded-sm bg-cover bg-center"
+      // style={{
+      //   backgroundImage: `url(${confetti})`,
+      //   // backgroundImage: `url(${chinese})`,
+      // }}
     >
       <div className="m-4 w-auto rounded-md bg-white p-4">
         {/* <div className="m-2 mx-auto h-full w-auto max-w-screen-sm rounded-md bg-white p-4 px-4"> */}

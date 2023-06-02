@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import imageService from "../services/imageService";
 import userService from "../services/userService";
 
-const confetti = require("../img/confetti.png");
+// const confetti = require("../img/confetti.png");
 
 const Home = ({ user }) => {
   const [comment, setComment] = useState({});
@@ -88,28 +88,28 @@ const Home = ({ user }) => {
 
   return (
     <div
-      className="flex min-h-screen flex-col items-center pb-4"
-      style={{
-        backgroundImage: `url(${confetti})`,
-        // backgroundImage: `url(${chinese})`,
-      }}
+      className="oma1 flex min-h-screen flex-col items-center pb-4"
+      // style={{
+      //   backgroundImage: `url(${confetti})`,
+      //   // backgroundImage: `url(${chinese})`,
+      // }}
     >
       {user ? (
-        <h1 className="text-white">Logged in as {user.user.username} </h1>
+        <h1 className="text-black">Logged in as {user.user.username} </h1>
       ) : (
-        <h1 className="text-white">Welcome to Camagru</h1>
+        <h1 className="text-black">Welcome to Camagru</h1>
       )}
       {imagesFromDb.map((post) => (
         <div
           key={post._id}
-          className="mb-4 mt-4 flex h-2/3 w-1/2 flex-col items-center justify-center rounded-md border-4 border-white bg-cyan-800"
+          className="post mb-4 mt-4 flex h-2/3 w-1/2 flex-col items-center justify-center rounded-md  text-white"
         >
           {/* USERNAME */}
-          <div className="oma mb-2 h-8 w-full border-2 border-orange-300 pl-2">
+          <div className="oma4 mb-2 h-8 w-full pl-2">
             {findUsername(post.user)}
           </div>
           {/* IMAGE */}
-          <div className="mb-2 h-64 w-3/4 border-2 border-orange-400">
+          <div className="post mb-2 h-64 w-3/4 rounded-sm">
             <img
               src={post.image.path}
               alt={post.image.desc}
@@ -117,7 +117,7 @@ const Home = ({ user }) => {
             />
           </div>
           {/* DESCRIPTION */}
-          <div className="oma h-8 w-full border-2 border-orange-700 px-2 pb-2 text-left text-white">
+          <div className="oma2 h-8 w-full  px-2 pb-2 text-left text-white">
             {post.image.desc}
           </div>
           {/* COMMENT FIELD */}
@@ -137,21 +137,21 @@ const Home = ({ user }) => {
             </div>
           ) : null}
           {/* COMMENTS */}
-          <div className="h-48 w-full overflow-auto border-2 border-orange-600">
+          <div className="h-48 w-full overflow-auto ">
             {/* all the comments */}
             {post.image.comments.map((comments) => (
               <div key={comments._id} className="grid grid-cols-2">
-                <strong className="mr-4 border border-blue-400">
+                <strong className="mr-4 border border-blue-400 text-black">
                   {comments.user.username}
                 </strong>
-                <div className="whitespace-pre-wrap border border-red-400">
+                <div className="whitespace-pre-wrap border border-red-400 text-black">
                   {comments.comment}
                 </div>
               </div>
             ))}
           </div>
           {/* PUBLISH TIME */}
-          <div className="oma h-8 w-full border-2 border-orange-700 pb-2 pr-2 text-right text-white">
+          <div className="oma4 h-8 w-full pb-2 pr-2 text-right text-white">
             {formatDate(post.createdAt).time} {formatDate(post.createdAt).date}
           </div>
         </div>

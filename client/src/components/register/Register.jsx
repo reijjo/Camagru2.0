@@ -2,7 +2,7 @@ import { Label, TextInput, Button } from "flowbite-react";
 import { useState } from "react";
 import userService from "../../services/userService";
 import Notification from "../common/Notification";
-const confetti = require("../../img/confetti.png");
+// const confetti = require("../../img/confetti.png");
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -126,11 +126,11 @@ const Register = () => {
 
   return (
     <div
-      className="flex min-h-screen items-center justify-center rounded-sm bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${confetti})`,
-        // backgroundImage: `url(${chinese})`,
-      }}
+      className="oma1 flex min-h-screen items-center justify-center rounded-sm bg-cover bg-center"
+      // style={{
+      //   backgroundImage: `url(${confetti})`,
+      //   // backgroundImage: `url(${chinese})`,
+      // }}
     >
       <div className="mx-auto mb-60 mt-20 w-2/3 max-w-screen-sm rounded-md bg-white p-4 px-4">
         <div className="mb-4 text-3xl font-bold">Register</div>

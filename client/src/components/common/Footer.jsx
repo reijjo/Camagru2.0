@@ -1,14 +1,15 @@
 import { Footer } from "flowbite-react";
-const kettu = require("../../img/kettu_wallpaper.jpg");
+// const kettu = require("../../img/kettu_wallpaper.jpg");
 
 const Foot = () => {
   return (
     <Footer
       container={true}
-      className="rounded-none bg-center"
-      style={{ backgroundImage: `url(${kettu})` }}
+      className="oma2 rounded-none bg-center"
+      // style={{ backgroundImage: `url(${kettu})` }}
     >
       <Footer.Copyright
+        className="text-white"
         href="http://github.com/reijjo"
         by="Reijjo™"
         year={2023}

@@ -363,7 +363,7 @@ const LoggedIn = ({ user }) => {
         </div>
       </div>
       {/* PREVIEW */}
-      <div className="h-40 justify-center overflow-x-scroll border border-orange-400 text-center md:flex md:h-screen md:w-1/5 md:flex-col md:items-center md:justify-start md:overflow-y-scroll">
+      <div className="h-40 justify-center overflow-x-scroll border border-orange-400 text-center md:flex md:h-screen md:w-1/5 md:flex-col md:items-center md:justify-start">
         <div className="hidden w-full border-2 border-blue-300 p-2 md:flex md:h-auto md:justify-center">
           Preview:
         </div>

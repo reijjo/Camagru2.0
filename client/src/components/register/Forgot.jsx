@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "flowbite-react";
 import userService from "../../services/userService";
 
-const confetti = require("../../img/confetti.png");
+// const confetti = require("../../img/confetti.png");
 
 const Verify = () => {
   const [email, setEmail] = useState("");
@@ -29,11 +29,11 @@ const Verify = () => {
 
   return (
     <div
-      className="flex min-h-screen items-start justify-center rounded-sm bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${confetti})`,
-        // backgroundImage: `url(${chinese})`,
-      }}
+      className="oma1 flex min-h-screen items-start justify-center rounded-sm bg-cover bg-center"
+      // style={{
+      //   backgroundImage: `url(${confetti})`,
+      //   // backgroundImage: `url(${chinese})`,
+      // }}
     >
       <div className="mx-auto mt-12 w-auto max-w-screen-sm rounded-md bg-white p-4 px-4">
         <h1 className="m-4 flex justify-center text-center text-2xl font-bold">

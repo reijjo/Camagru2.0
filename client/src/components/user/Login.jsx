@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Label, TextInput, Button } from "flowbite-react";
 import loginService from "../../services/loginService";
 import Notification from "../common/Notification";
-const confetti = require("../../img/confetti.png");
+// const confetti = require("../../img/confetti.png");
 // const tabbied = require("../img/tabbied.png");
 // const chinese = require("../img/pattern_chinese.png");
 
@@ -38,11 +38,11 @@ const Login = ({ updateUser }) => {
 
   return (
     <div
-      className="flex h-screen items-center justify-center rounded-sm bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${confetti})`,
-        // backgroundImage: `url(${chinese})`,
-      }}
+      className="oma1 flex h-screen items-center justify-center rounded-sm bg-cover bg-center"
+      // style={{
+      //   backgroundImage: `url(${confetti})`,
+      //   // backgroundImage: `url(${chinese})`,
+      // }}
     >
       <div className="mx-auto w-2/3 max-w-screen-sm rounded-md bg-white p-4 px-4">
         <div className="mb-4 text-3xl font-bold">Login</div>
