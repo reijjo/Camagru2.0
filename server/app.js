@@ -31,6 +31,8 @@ app.use(bodyparser.urlencoded({ limit: "50mb", extended: true }));
 app.use(bodyparser.json({ limit: "50mb" }));
 app.use(middleware.requestLogger);
 
+app.use(express.static("build"));
+
 app.use("/api/images", express.static(path.join(__dirname, "img")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
