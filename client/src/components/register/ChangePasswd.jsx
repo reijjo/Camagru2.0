@@ -30,7 +30,7 @@ const ChangePasswd = () => {
       try {
         const res = await userService.getForgot(verifyCode);
         setUser(res.user);
-        console.log("changg", res);
+        // console.log("changg", res);
       } catch (error) {
         setMessage(error.message);
       }
@@ -38,9 +38,9 @@ const ChangePasswd = () => {
     verifyUser();
   }, [verifyCode, message]);
 
-  console.log("user", user);
+  // console.log("user", user);
 
-  console.log("passwords", passwd, confPw);
+  // console.log("passwords", passwd, confPw);
 
   const handleValidPw = (event) => {
     const value = event.target.value;
@@ -96,9 +96,9 @@ const ChangePasswd = () => {
 
   const resetPw = async () => {
     try {
-      console.log("ver", verifyCode, passwd);
+      // console.log("ver", verifyCode, passwd);
       const res = await userService.changeForgot(verifyCode, passwd);
-      console.log("RESSSP", res);
+      // console.log("RESSSP", res);
       setMessage({
         message: res.message,
         style: res.style,

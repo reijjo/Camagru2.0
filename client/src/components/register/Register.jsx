@@ -53,7 +53,7 @@ const Register = () => {
         window.location.replace("/");
       }, 5000);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setNotification({
         message: error.response.data.error,
         style: { color: "red", border: "2px solid red" },

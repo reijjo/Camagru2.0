@@ -28,11 +28,11 @@ const Home = ({ user }) => {
 
   const addComment = async (id) => {
     // event.preventDefault();
-    console.log("imageid", id);
-    console.log("comment", comment);
+    // console.log("imageid", id);
+    // console.log("comment", comment);
 
     const res = await imageService.addComment(comment[id], id, user.user.id);
-    console.log("add comment res", res);
+    // console.log("add comment res", res);
     setNotification(res);
 
     setComment({ ...comment, [id]: "" });

@@ -5,7 +5,7 @@ const baseUrl = "http://localhost:3001/api/images";
 // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getPreviews = async (user) => {
-  console.log("Axios user", user);
+  // console.log("Axios user", user);
   const res = await axios.get(`${baseUrl}/preview`, {
     params: {
       userId: user.user.id,
@@ -30,7 +30,7 @@ const savePreview = async (image, user) => {
 };
 
 const deletePreview = async (imageInfo) => {
-  console.log("Axios ImageID", imageInfo);
+  // console.log("Axios ImageID", imageInfo);
   const res = await axios.delete(`${baseUrl}/preview`, {
     params: { image: imageInfo },
   });
@@ -38,14 +38,14 @@ const deletePreview = async (imageInfo) => {
 };
 
 const getImage = async (id) => {
-  console.log("Axios Id", id);
+  // console.log("Axios Id", id);
   const res = await axios.get(`${baseUrl}/loggedIn/${id}`);
-  console.log("Axios res", res);
+  // console.log("Axios res", res);
   return res.data;
 };
 
 const makePost = async (desc, id) => {
-  console.log("Axios", desc, id);
+  // console.log("Axios", desc, id);
   const res = await axios.put(`${baseUrl}/loggedIn/${id}`, desc);
   return res.data;
 };

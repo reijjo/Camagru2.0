@@ -36,7 +36,7 @@ const changeForgot = async (verifyCode, newPassword) => {
     verifyCode: verifyCode,
     newPassword: newPassword,
   });
-  console.log("RES", res);
+  // console.log("RES", res);
   return res.data;
 };
 

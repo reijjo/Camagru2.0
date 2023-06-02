@@ -32,7 +32,7 @@ const Login = ({ updateUser }) => {
       setTimeout(() => {
         setNotification(null);
       }, 5000);
-      console.log(error);
+      // console.log(error);
     }
   };
 

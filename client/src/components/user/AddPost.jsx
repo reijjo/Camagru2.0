@@ -20,9 +20,9 @@ const AddPost = ({ user }) => {
 
   useEffect(() => {
     const findImage = async (imageId) => {
-      console.log("id", imageId);
+      // console.log("id", imageId);
       const res = await imageService.getImage(imageId);
-      console.log("res", res);
+      // console.log("res", res);
       if (res.message === "fail") {
         navigate("/");
       } else {
@@ -41,9 +41,9 @@ const AddPost = ({ user }) => {
     const description = {
       desc: desc,
     };
-    console.log("des", description, image._id);
+    // console.log("des", description, image._id);
     const res = await imageService.makePost(description, image._id);
-    console.log("BAAACKKK", res);
+    // console.log("BAAACKKK", res);
     navigate("/");
   };
 

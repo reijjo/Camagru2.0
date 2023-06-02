@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.3cfed161.css",
-    "main.js": "/static/js/main.3c5a98be.js",
+    "main.js": "/static/js/main.d0540972.js",
     "static/media/Telefunken_FuBK.png": "/static/media/Telefunken_FuBK.9af4efb26b87fcb2b882.png",
     "static/media/puut.png": "/static/media/puut.3c4de95a8f75df108f03.png",
     "index.html": "/index.html",
     "main.3cfed161.css.map": "/static/css/main.3cfed161.css.map",
-    "main.3c5a98be.js.map": "/static/js/main.3c5a98be.js.map"
+    "main.d0540972.js.map": "/static/js/main.d0540972.js.map"
   },
   "entrypoints": [
     "static/css/main.3cfed161.css",
-    "static/js/main.3c5a98be.js"
+    "static/js/main.d0540972.js"
   ]
 }

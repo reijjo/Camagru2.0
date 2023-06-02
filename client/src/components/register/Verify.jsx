@@ -13,7 +13,7 @@ const Verify = () => {
     const verifyUser = async () => {
       try {
         const res = await userService.verifyUser(verifyCode);
-        console.log("RESSSP", res);
+        // console.log("RESSSP", res);
         setMessage(res.message);
         setUser(res.user);
       } catch (error) {

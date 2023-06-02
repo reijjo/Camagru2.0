@@ -11,12 +11,12 @@ const Verify = () => {
   const handleEmail = (event) => {
     setEmail(event.target.value);
   };
-  console.log(email);
+  // console.log(email);
 
   const getPw = async () => {
     try {
       const res = await userService.forgotPasswd(email);
-      console.log("HUHU", res);
+      // console.log("HUHU", res);
       setMessage(res.message);
     } catch (error) {
       console.error("Error sending password link.", error);
@@ -24,7 +24,7 @@ const Verify = () => {
     setTimeout(() => {
       setMessage(null);
     }, 5000);
-    console.log("repe on paras", email);
+    // console.log("repe on paras", email);
   };
 
   return (

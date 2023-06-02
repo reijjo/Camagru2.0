@@ -5,7 +5,7 @@ const Nav = ({ user }) => {
   console.log("NAVBAR", user);
 
   const logout = (user) => {
-    console.log("nappulasta", user);
+    // console.log("nappulasta", user);
     user = "";
     window.localStorage.removeItem("loggedIn");
     window.location.replace("/");

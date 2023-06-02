@@ -39,11 +39,11 @@ const Settings = ({ user }) => {
     }
   }, [user]);
 
-  console.log("MINA", user);
-  console.log("email", email);
-  console.log("username", username);
-  console.log("password", pw);
-  console.log("CONFIRMpw", confirmPw);
+  // console.log("MINA", user);
+  // console.log("email", email);
+  // console.log("username", username);
+  // console.log("password", pw);
+  // console.log("CONFIRMpw", confirmPw);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -121,7 +121,7 @@ const Settings = ({ user }) => {
         newConfpw: confirmPw,
       };
       const res = await userService.updateInfo(user.user.id, newInfo);
-      console.log("RESPP", res);
+      // console.log("RESPP", res);
       setMessage({ message: res.message, style: res.style });
       setTimeout(() => {
         setMessage(null);

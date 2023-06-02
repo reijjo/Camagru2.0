@@ -38,7 +38,7 @@ const LoggedIn = ({ user }) => {
     fetchPreviews();
   }, [user, getPreviews]);
 
-  console.log("previews2", previews2);
+  // console.log("previews2", previews2);
 
   useEffect(() => {
     if (webcamON && webcamRef.current) {
@@ -95,7 +95,7 @@ const LoggedIn = ({ user }) => {
 
       try {
         const res = await imageService.savePreview(fileImage, user);
-        console.log("taa", res);
+        // console.log("taa", res);
         // setPreviews(res.filePath);
         setNotification({ message: res.message, style: res.style });
         setTimeout(() => {
@@ -112,7 +112,7 @@ const LoggedIn = ({ user }) => {
   // DELETE / USE PREVIEW
   const delPreview = async (image) => {
     const res = await imageService.deletePreview(image);
-    console.log("Del Preview res", res);
+    // console.log("Del Preview res", res);
     setNotification({ message: res.message, style: res.style });
     setTimeout(() => {
       setNotification(null);
@@ -121,7 +121,7 @@ const LoggedIn = ({ user }) => {
   };
 
   const addPreview = async (image) => {
-    console.log("image", image);
+    // console.log("image", image);
     navigate(`/loggedIn/${image._id}`);
   };
 
@@ -143,7 +143,7 @@ const LoggedIn = ({ user }) => {
       );
     };
     stickerImage.src = trees;
-    console.log("Added PUUT Sticker.");
+    // console.log("Added PUUT Sticker.");
   };
 
   const removeSticker1 = () => {
@@ -151,13 +151,13 @@ const LoggedIn = ({ user }) => {
     const stickerCanvas = stickerCanvasRef.current;
     const stickerContext = stickerCanvas.getContext("2d");
     stickerContext.clearRect(0, 0, stickerCanvas.width, stickerCanvas.height);
-    console.log("Removed PUUT Sticker.");
+    // console.log("Removed PUUT Sticker.");
   };
 
   //IMAGE UPLOAD
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    console.log("FILE", file);
+    // console.log("FILE", file);
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     const image = new Image();
@@ -175,7 +175,7 @@ const LoggedIn = ({ user }) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
-    console.log("Canvas Cleared!");
+    // console.log("Canvas Cleared!");
     setUploadingON(false);
   };
 
@@ -299,7 +299,7 @@ const LoggedIn = ({ user }) => {
                 removeSticker1();
                 setUploadingON(false);
                 setWebcamON(false);
-                console.log("Photo taken!");
+                // console.log("Photo taken!");
               }}
               disabled={!webcamON && !uploadingON ? true : false}
             >
@@ -314,7 +314,7 @@ const LoggedIn = ({ user }) => {
               className="m-2 flex p-2"
               onClick={() => {
                 setWebcamON(true);
-                console.log("Started Webcam!");
+                // console.log("Started Webcam!");
               }}
               disabled={webcamON || uploadingON ? true : false}
             >
@@ -326,7 +326,7 @@ const LoggedIn = ({ user }) => {
                 setWebcamON(false);
                 clearCanvas();
                 removeSticker1();
-                console.log("Webcam Off!");
+                // console.log("Webcam Off!");
               }}
               disabled={webcamON ? false : true}
             >
@@ -336,7 +336,7 @@ const LoggedIn = ({ user }) => {
               <Button
                 className="m-2 flex p-2"
                 onClick={() => {
-                  console.log("uploading image.");
+                  // console.log("uploading image.");
                   if (uploadingON) {
                     clearCanvas();
                   }
