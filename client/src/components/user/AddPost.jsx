@@ -42,7 +42,8 @@ const AddPost = ({ user }) => {
       desc: desc,
     };
     // console.log("des", description, image._id);
-    const res = await imageService.makePost(description, image._id);
+    await imageService.makePost(description, image._id);
+    // const res = await imageService.makePost(description, image._id);
     // console.log("BAAACKKK", res);
     navigate("/");
   };

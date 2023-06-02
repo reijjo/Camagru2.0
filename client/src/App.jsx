@@ -33,7 +33,8 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const users = await userService.getUsers();
+      await userService.getUsers();
+      // const users = await userService.getUsers();
       // console.log("USERS", users);
     };
     fetchData();
