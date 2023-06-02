@@ -8,7 +8,8 @@ const Img = require("../models/images");
 
 const imageRouter = express.Router();
 
-const baseUrl = "http://localhost:3001";
+const baseUrl = "/";
+// const baseUrl = "http://localhost:3001";
 
 const uploadDir = path.join(__dirname, `../uploads`);
 if (!fs.existsSync(uploadDir)) {
