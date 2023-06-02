@@ -242,7 +242,8 @@ usersRouter.post("/register", async (req, res) => {
     from: config.EMAIL_USERNAME,
     to: newUser.email,
     subject: "Verification for Camagru",
-    html: `<h1>Hi! Click the link: <a href='http://localhost:3000/register/${codeHash}'> Here! </a> </h1>`,
+    html: `<h1>Hi! Click the link: <a href='https://camagru.onrender.com//register/${codeHash}'> Here! </a> </h1>`,
+    // html: `<h1>Hi! Click the link: <a href='http://localhost:3000/register/${codeHash}'> Here! </a> </h1>`,
   };
 
   transporter.sendMail(options, (err, info) => {
@@ -299,7 +300,8 @@ usersRouter.post("/forgot", async (req, res) => {
     from: config.EMAIL_USERNAME,
     to: user.email,
     subject: "Create new password!",
-    html: `<h1>Click the link to change your password: <a href='http://localhost:3000/forgot/${user.verifyCode}'> THE LINK </a> </h1>`,
+    html: `<h1>Click the link to change your password: <a href='https://camagru.onrender.com/forgot/${user.verifyCode}'> THE LINK </a> </h1>`,
+    // html: `<h1>Click the link to change your password: <a href='http://localhost:3000/forgot/${user.verifyCode}'> THE LINK </a> </h1>`,
   };
 
   transporter.sendMail(options, (err, info) => {
