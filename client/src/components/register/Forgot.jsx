@@ -4,7 +4,7 @@ import userService from "../../services/userService";
 
 // const confetti = require("../../img/confetti.png");
 
-const Verify = () => {
+const Forgot = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
 
@@ -71,4 +71,4 @@ const Verify = () => {
   );
 };
 
-export default Verify;
+export default Forgot;

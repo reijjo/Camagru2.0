@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Label, TextInput, Button } from "flowbite-react";
 import loginService from "../../services/loginService";
 import Notification from "../common/Notification";
+import { Link } from "react-router-dom";
 // const confetti = require("../../img/confetti.png");
 // const tabbied = require("../img/tabbied.png");
 // const chinese = require("../img/pattern_chinese.png");
@@ -81,12 +82,12 @@ const Login = ({ updateUser }) => {
           <Button type="submit">Login</Button>
         </form>
         <div className="py-1 text-right">
-          <a
+          <Link
             className="text-blue-900 transition-colors duration-300 hover:text-blue-700"
-            href="/forgot"
+            to="/forgot"
           >
             Forgot password?
-          </a>
+          </Link>
         </div>
       </div>
     </div>
