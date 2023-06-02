@@ -40,7 +40,7 @@ const Home = ({ user }) => {
   console.log("user", postUser);
 
   if (!imagesFromDb.length) {
-    return <div>loading...</div>;
+    return <div className="min-h-screen">loading...</div>;
   }
 
   const formatDate = (date) => {
@@ -122,7 +122,7 @@ const Home = ({ user }) => {
           </div>
           {/* COMMENT FIELD */}
           {user ? (
-            <div className="flex h-12 w-full flex-row border-2 border-orange-500">
+            <div className="flex h-12 w-full flex-row ">
               <input
                 type="text"
                 placeholder="add comment..."

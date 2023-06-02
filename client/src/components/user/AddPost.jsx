@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import imageService from "../../services/imageService";
 // import Notification from "../common/Notification";
 
-const confetti = require("../../img/confetti.png");
+// const confetti = require("../../img/confetti.png");
 
 const AddPost = ({ user }) => {
   const [desc, setDesc] = useState("");
@@ -67,17 +67,13 @@ const AddPost = ({ user }) => {
   }
 
   return (
-    <div
-      className="flex h-screen items-center justify-center rounded-sm bg-cover bg-center"
-      style={{
-        backgroundImage: `url(${confetti})`,
-      }}
-    >
+    <div className="oma1 flex h-screen items-center justify-center rounded-sm bg-cover bg-center">
       <form
         onSubmit={handleSubmit}
-        className="rounded-md border-2 border-red-600 bg-slate-200 md:flex md:h-4/5 md:w-4/5 md:flex-col md:items-center md:justify-center"
+        className="post rounded-md bg-slate-200 md:flex md:h-4/5 md:w-4/5 md:flex-col md:items-center md:justify-center"
+        style={{ backgroundColor: "white" }}
       >
-        <div className="border-2 border-orange-400 p-1 md:m-4 md:flex md:aspect-square md:w-3/4">
+        <div className=" p-1 md:m-4 md:flex md:aspect-square md:w-3/4">
           <img
             src={image.image.path}
             alt="preview"
@@ -85,7 +81,7 @@ const AddPost = ({ user }) => {
           />
         </div>
         {/* <Notification notification={notification} /> */}
-        <div className="border-2 border-violet-400 md:m-2 md:flex md:h-auto md:w-3/5 md:p-1">
+        <div className=" md:m-2 md:flex md:h-auto md:w-3/5 md:p-1">
           <input
             type="text"
             placeholder="Picture description..."
@@ -105,7 +101,7 @@ const AddPost = ({ user }) => {
             <li>{descLenMsg}</li>
           </div>
         )}
-        <div className="flex flex-row justify-between border-2 border-violet-400 md:m-2 md:flex md:h-auto md:w-2/5 md:justify-between md:p-1">
+        <div className="flex flex-row justify-between  md:m-2 md:flex md:h-auto md:w-2/5 md:justify-between md:p-1">
           <Button type="submit">post</Button>
           <Button
             className="border-2 border-gray-500"

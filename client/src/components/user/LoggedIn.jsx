@@ -6,7 +6,7 @@ import { v4 as uuid } from "uuid";
 import Notification from "../common/Notification";
 import imageService from "../../services/imageService";
 
-const confetti = require("../../img/confetti.png");
+// const confetti = require("../../img/confetti.png");
 const trees = require("../../img/puut.png");
 const viritys = require("../../img/Telefunken_FuBK.png");
 
@@ -181,27 +181,26 @@ const LoggedIn = ({ user }) => {
 
   return (
     <div
-      className="font flex min-h-screen flex-col text-blue-200 md:max-h-screen md:flex-row"
-      style={{
-        backgroundImage: `url(${confetti})`,
-      }}
+      className="oma1 font flex min-h-screen flex-col text-black md:max-h-screen md:flex-row"
+      // style={{
+      //   backgroundImage: `url(${confetti})`,
+      // }}
     >
       {/* STICKERS */}
-      <div className="h-30 flex w-screen justify-center gap-4 border-4 border-red-600 md:h-screen md:w-1/5 md:flex-col md:items-center md:justify-start">
+      <div className="h-30 flex w-screen justify-center gap-4  md:h-screen md:w-1/5 md:flex-col md:items-center md:justify-start">
         <div className="hidden w-full p-2 md:flex md:h-auto md:justify-center">
           Stickers:
         </div>
-        <div className="my-2 flex w-1/4 border border-yellow-200 md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
-          <div className="relative h-full w-full border-2 border-blue-400">
+        <div className="my-2 flex w-1/4  md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
+          <div className="relative h-full w-full ">
             <img
               src={trees}
               alt="flowers"
               className="object-fit h-full w-full bg-gray-300"
             />
-            {/* <div className="absolute inset-x-0 bottom-0 border-2 border-yellow-300 text-center"> */}
             <Button
               size="xs"
-              className="absolute inset-x-0 bottom-0 mx-4 flex max-w-sm border-2 border-yellow-300 text-center"
+              className="absolute inset-x-0 bottom-0 mx-4 flex max-w-sm  text-center"
               onClick={!sticker1 ? addSticker1 : removeSticker1}
             >
               {!sticker1 ? "Add" : "Remove"}
@@ -209,17 +208,16 @@ const LoggedIn = ({ user }) => {
             {/* </div> */}
           </div>
         </div>
-        <div className="my-2 flex w-1/4 border border-yellow-200 md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
-          <div className="relative h-full w-full border-2 border-blue-400">
+        <div className="my-2 flex w-1/4  md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
+          <div className="relative h-full w-full ">
             <img
               src={trees}
               alt="flowers"
-              className="h-full w-full border border-red-600 bg-gray-300 object-cover"
+              className="h-full w-full  bg-gray-300 object-cover"
             />
-            {/* <div className="absolute inset-x-0 bottom-0 border-2 border-yellow-300 text-center"> */}
             <Button
               size="xs"
-              className="absolute inset-x-0 bottom-0 mx-4 flex max-w-sm border-2 border-yellow-300 text-center"
+              className="absolute inset-x-0 bottom-0 mx-4 flex max-w-sm  text-center"
               onClick={!sticker1 ? addSticker1 : removeSticker1}
             >
               {!sticker1 ? "Add" : "Remove"}
@@ -227,17 +225,16 @@ const LoggedIn = ({ user }) => {
             {/* </div> */}
           </div>
         </div>
-        <div className="my-2 flex w-1/4 border border-yellow-200 md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
-          <div className="relative h-full w-full border-2 border-blue-400">
+        <div className="my-2 flex w-1/4  md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center">
+          <div className="relative h-full w-full ">
             <img
               src={trees}
               alt="flowers"
-              className="h-full w-full border border-red-600 bg-gray-300 object-cover"
+              className="h-full w-full  bg-gray-300 object-cover"
             />
-            {/* <div className="absolute inset-x-0 bottom-0 border-2 border-yellow-300 text-center"> */}
             <Button
               size="xs"
-              className="absolute inset-x-0 bottom-0 mx-4 flex max-w-sm border-2 border-yellow-300 text-center"
+              className="absolute inset-x-0 bottom-0 mx-4 flex max-w-sm  text-center"
               onClick={!sticker1 ? addSticker1 : removeSticker1}
             >
               {!sticker1 ? "Add" : "Remove"}
@@ -247,9 +244,9 @@ const LoggedIn = ({ user }) => {
         </div>
       </div>
       {/* CENTER DIV */}
-      <div className="flex  w-full flex-col border-4 border-blue-400 p-6 md:h-auto md:w-3/5 md:justify-center">
+      <div className="flex  w-full flex-col  p-6 md:h-auto md:w-3/5 md:justify-center">
         <div
-          className="relative m-2 h-3/4 border-4 border-red-600"
+          className="post relative m-2 h-3/4"
           // style={{ height: "50%" }}
         >
           <div style={{ paddingTop: "100%" }}></div>
@@ -312,7 +309,7 @@ const LoggedIn = ({ user }) => {
         </div>
         <Notification message={notification} />
         <div className="flex items-center justify-center">
-          <div className="z-10 m-6 flex h-auto flex-wrap justify-center border-2 border-green-400 p-2 md:h-auto md:w-full md:justify-between">
+          <div className="z-10 m-6 flex h-auto flex-wrap justify-center  p-2 md:h-auto md:w-full md:justify-between">
             <Button
               className="m-2 flex p-2"
               onClick={() => {
@@ -363,14 +360,14 @@ const LoggedIn = ({ user }) => {
         </div>
       </div>
       {/* PREVIEW */}
-      <div className="h-40 justify-center overflow-x-scroll border border-orange-400 text-center md:flex md:h-screen md:w-1/5 md:flex-col md:items-center md:justify-start">
-        <div className="hidden w-full border-2 border-blue-300 p-2 md:flex md:h-auto md:justify-center">
+      <div className="h-40 justify-center overflow-x-scroll  text-center md:flex md:h-screen md:w-1/5 md:flex-col md:items-center md:justify-start">
+        <div className="hidden w-full  p-2 md:flex md:h-auto md:justify-center">
           Preview:
         </div>
         {previews2
           ? previews2.map((p) => (
               <div
-                className="preview mx-2 my-2 inline-block w-64 border border-yellow-200 md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center"
+                className="post preview mx-2 my-2 inline-block w-64  md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center"
                 key={p._id}
               >
                 <div className="relative h-full w-full">
@@ -379,7 +376,7 @@ const LoggedIn = ({ user }) => {
                     alt="preview"
                     className="object-fit h-full w-full"
                   />
-                  <div className="absolute inset-x-0 bottom-0 mx-2 flex justify-between border-4 border-green-400">
+                  <div className="absolute inset-x-0 bottom-0 mx-2 flex justify-between ">
                     <Button
                       className="flex md:px-2"
                       size="xs"
