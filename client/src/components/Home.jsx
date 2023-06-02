@@ -2,12 +2,14 @@ import { Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import imageService from "../services/imageService";
 import userService from "../services/userService";
+import Notification from "./common/Notification";
 
 // const confetti = require("../img/confetti.png");
 
 const Home = ({ user }) => {
   const [comment, setComment] = useState({});
   const [clearInput, setClearInput] = useState(false);
+  const [notification, setNotification] = useState(null);
 
   const [imagesFromDb, setImagesFromDb] = useState([]);
   const [postUser, setPostUser] = useState([]);
@@ -31,13 +33,14 @@ const Home = ({ user }) => {
 
     const res = await imageService.addComment(comment[id], id, user.user.id);
     console.log("add comment res", res);
+    setNotification(res);
 
     setComment({ ...comment, [id]: "" });
     setClearInput(true);
+    setTimeout(() => {
+      setNotification(null);
+    }, 5000);
   };
-
-  console.log("imma", imagesFromDb);
-  console.log("user", postUser);
 
   if (!imagesFromDb.length) {
     return <div className="min-h-screen">loading...</div>;
@@ -120,13 +123,14 @@ const Home = ({ user }) => {
           <div className="oma2 h-8 w-full  px-2 pb-2 text-left text-white">
             {post.image.desc}
           </div>
+          <Notification message={notification} />
           {/* COMMENT FIELD */}
           {user ? (
             <div className="flex h-12 w-full flex-row ">
               <input
                 type="text"
                 placeholder="add comment..."
-                className="h-auto flex-grow"
+                className="h-auto flex-grow text-black"
                 // value={comment[post._id]}
                 value={!clearInput ? comment[post._id] || "" : ""}
                 onChange={(e) => handleInputChange(e, post._id)}
@@ -141,10 +145,10 @@ const Home = ({ user }) => {
             {/* all the comments */}
             {post.image.comments.map((comments) => (
               <div key={comments._id} className="grid grid-cols-2">
-                <strong className="mr-4 border border-blue-400 text-black">
+                <strong className="mr-4  text-black">
                   {comments.user.username}
                 </strong>
-                <div className="whitespace-pre-wrap border border-red-400 text-black">
+                <div className="whitespace-pre-wrap  text-black">
                   {comments.comment}
                 </div>
               </div>

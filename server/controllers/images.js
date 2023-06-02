@@ -213,11 +213,21 @@ imageRouter.post("/comment", async (req, res) => {
       comment: comment,
     };
 
+    if (comment.length > 200) {
+      return res.json({
+        message: "max 200 characters.",
+        style: { color: "red", border: "2px solid" },
+      });
+    }
+
     image.image.comments.push(newComment);
 
     await image.save();
 
-    res.send({ message: "Comment added succesfully!" });
+    res.send({
+      message: "Comment added succesfully!",
+      style: { color: "green", border: "2px solid" },
+    });
   } catch (error) {
     console.error("Error adding comment:", error);
     res.status(500).send({ error: "failed to add comment." });
