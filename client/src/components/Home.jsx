@@ -105,7 +105,7 @@ const Home = ({ user }) => {
       {imagesFromDb.map((post) => (
         <div
           key={post._id}
-          className="post mb-4 mt-4 flex h-2/3 w-1/2 flex-col items-center justify-center rounded-md  text-white"
+          className="post mb-4 mt-4 flex h-2/3 w-2/3 max-w-md flex-col items-center justify-center  rounded-md text-white"
         >
           {/* USERNAME */}
           <div className="oma4 mb-2 h-8 w-full pl-2">
