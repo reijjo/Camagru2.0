@@ -126,7 +126,7 @@ const Home = ({ user }) => {
           <Notification message={notification} />
           {/* COMMENT FIELD */}
           {user ? (
-            <div className="flex h-12 w-full flex-row ">
+            <div className="flex h-12 w-full flex-col bg-blue-700 sm:flex-row">
               <input
                 type="text"
                 placeholder="add comment..."
@@ -135,13 +135,16 @@ const Home = ({ user }) => {
                 value={!clearInput ? comment[post._id] || "" : ""}
                 onChange={(e) => handleInputChange(e, post._id)}
               />
-              <Button className="w-auto" onClick={() => addComment(post._id)}>
+              <Button
+                className="h-full w-auto"
+                onClick={() => addComment(post._id)}
+              >
                 Add
               </Button>
             </div>
           ) : null}
           {/* COMMENTS */}
-          <div className="h-48 w-full overflow-auto ">
+          <div className="mt-12 h-48 w-full overflow-auto sm:mt-0">
             {/* all the comments */}
             {post.image.comments.map((comments) => (
               <div key={comments._id} className="grid grid-cols-2">
