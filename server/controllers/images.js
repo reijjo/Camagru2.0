@@ -11,7 +11,8 @@ const imageRouter = express.Router();
 const baseUrl = "https://camagru2back.onrender.com";
 // const baseUrl = "http://localhost:3001";
 
-const uploadDir = path.join(__dirname, `../uploads`);
+const uploadDir = path.join(__dirname, `./uploads`);
+// const uploadDir = path.join(__dirname, `../uploads`);
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
   console.log("uploads/ folder created.");
