@@ -8,7 +8,7 @@ const Img = require("../models/images");
 
 const imageRouter = express.Router();
 
-const baseUrl = "/";
+const baseUrl = "https://camagru2back.onrender.com";
 // const baseUrl = "http://localhost:3001";
 
 const uploadDir = path.join(__dirname, `../uploads`);

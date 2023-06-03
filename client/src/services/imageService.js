@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const baseUrl = "http://localhost:3001/api/images";
-const baseUrl = "/api/images";
+const baseUrl = "https://camagru2back.onrender.com/api/images";
 
 // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

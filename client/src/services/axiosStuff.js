@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "/";
+const baseUrl = "https://camagru2back.onrender.com";
 // const baseUrl = "http://localhost:3001";
 
 const justget = () => {
