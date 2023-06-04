@@ -367,7 +367,7 @@ const LoggedIn = ({ user }) => {
         {previews2
           ? previews2.map((p) => (
               <div
-                className="post preview mx-2 my-2 inline-block w-64  md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center"
+                className="post preview mx-2 my-2 inline-block w-64 overflow-x-hidden  md:flex md:h-1/4 md:w-full md:flex-col md:items-center md:justify-center"
                 key={p._id}
               >
                 <div className="relative h-full w-full">
