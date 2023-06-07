@@ -4,7 +4,7 @@ import imageService from "../services/imageService";
 import userService from "../services/userService";
 import Notification from "./common/Notification";
 
-// const confetti = require("../img/confetti.png");
+const kettu = require("../img/kettu_wallpaper.jpg");
 
 const Home = ({ user }) => {
   const [comment, setComment] = useState({});
@@ -163,6 +163,38 @@ const Home = ({ user }) => {
           </div>
         </div>
       ))}
+      {/* SAMPLE */}
+      <div
+        key="1232425"
+        className="post mb-4 mt-4 flex h-2/3 w-2/3 max-w-md flex-col items-center justify-center  rounded-md text-white"
+      >
+        {/* USERNAME */}
+        <div className="oma4 mb-2 h-8 w-full pl-2">SAMPLE</div>
+        {/* IMAGE */}
+        <div className="post mb-2 h-64 w-3/4 rounded-sm">
+          <img src={kettu} alt="kettu" className="h-full w-full" />
+        </div>
+        {/* DESCRIPTION */}
+        <div className="oma2 h-8 w-full  px-2 pb-2 text-left text-white">
+          TESTPIC
+        </div>
+        <Notification message={notification} />
+        {/* COMMENT FIELD */}
+
+        {/* COMMENTS */}
+        <div className="mt-12 h-48 w-full overflow-auto sm:mt-0">
+          {/* all the comments */}
+
+          <div key="kdakk" className="grid grid-cols-2">
+            <strong className="mr-4  text-black">random_dude</strong>
+            <div className="whitespace-pre-wrap  text-black">kappas</div>
+          </div>
+        </div>
+        {/* PUBLISH TIME */}
+        <div className="oma4 h-8 w-full pb-2 pr-2 text-right text-white">
+          NOW
+        </div>
+      </div>
     </div>
   );
 };
